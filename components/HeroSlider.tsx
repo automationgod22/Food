@@ -101,6 +101,7 @@ const slides: Slide[] = [
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -128,11 +129,31 @@ export default function HeroSlider() {
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    setTouchStartX(null);
+  };
+
   return (
     <section
       className="kp-hero-section"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       aria-label="Kailash Parbat Showcase"
     >
       {/* Background Ambience Layers */}
@@ -159,6 +180,18 @@ export default function HeroSlider() {
                   {slide.title} <br />
                   <span className="kp-hero-highlight">{slide.highlight}</span>
                 </h1>
+
+                {/* Mobile-only featured dish image */}
+                <div className="kp-mobile-dish-preview">
+                  <img
+                    src={slide.image}
+                    alt={`${slide.title} ${slide.highlight}`}
+                    className="kp-mobile-hero-img"
+                  />
+                  <div className="kp-mobile-img-badge">
+                    <span>{slide.priceTag || '100% Pure Veg'}</span>
+                  </div>
+                </div>
 
                 <p className="kp-hero-desc">{slide.subtitle}</p>
 
@@ -211,7 +244,7 @@ export default function HeroSlider() {
                 </div>
               </div>
 
-              {/* Right Visual Column */}
+              {/* Desktop Right Visual Column */}
               <div className="kp-hero-visual-col">
                 <div className="kp-visual-frame">
                   <div className="kp-frame-decor"></div>

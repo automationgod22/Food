@@ -3984,9 +3984,432 @@ html.dark .kp-foot-title {
   }
 }
 
-@media (max-width: 640px) {
+/* ==========================================================
+   QUICK HIGHLIGHTS & BANNERS STRIP
+   ========================================================== */
+.kp-highlights-bar {
+  padding: 0 0 40px;
+  background: var(--beige);
+  position: relative;
+  z-index: 10;
+  margin-top: -20px;
+}
+
+html.dark .kp-highlights-bar {
+  background: #120e0c;
+}
+
+.kp-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.kp-highlight-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+html.dark .kp-highlight-card {
+  background: #1d1714;
+  border-color: rgba(240, 171, 61, 0.16);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.kp-highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+  border-color: var(--orange);
+}
+
+.kp-hl-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.kp-hl-icon-wrap.chaat {
+  background: rgba(231, 120, 25, 0.12);
+}
+
+.kp-hl-icon-wrap.butter {
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.kp-hl-icon-wrap.veg {
+  background: rgba(16, 185, 129, 0.14);
+}
+
+.kp-hl-icon-wrap.delivery {
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.kp-hl-content {
+  flex-grow: 1;
+}
+
+.kp-hl-content h4 {
+  font-family: var(--ff-d);
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.kp-hl-content p {
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.kp-hl-link {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 0.04em;
+}
+
+.kp-hl-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.kp-hl-btns {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.kp-hl-mini-btn {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.kp-hl-mini-btn.zomato {
+  background: #ef4444;
+  color: #fff;
+}
+
+.kp-hl-mini-btn.swiggy {
+  background: #f97316;
+  color: #fff;
+}
+
+.kp-hl-mini-btn.book {
+  background: var(--dark);
+  color: #fff;
+}
+
+html.dark .kp-hl-mini-btn.book {
+  background: #e0913e;
+  color: #120e0c;
+}
+
+/* ==========================================================
+   MOBILE DISH PREVIEW IN HERO (PHONE SPECIFIC)
+   ========================================================== */
+.kp-mobile-dish-preview {
+  display: none;
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 14px 0 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
+.kp-mobile-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kp-mobile-img-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(20, 16, 14, 0.85);
+  color: #f59e0b;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(240, 171, 61, 0.3);
+}
+
+/* ==========================================================
+   STICKY MOBILE ACTION BAR (PHONE SCREENS)
+   ========================================================== */
+.kp-mobile-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(22, 17, 14, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(240, 171, 61, 0.28);
+  padding: 8px 10px;
+  z-index: 999;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.kp-mobile-bar-inner {
+  max-width: 500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr 0.9fr;
+  gap: 6px;
+  align-items: center;
+}
+
+.kp-mbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 9px 6px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.kp-mbar-btn.zomato {
+  background: #ef4444;
+  color: #fff;
+}
+
+.kp-mbar-btn.swiggy {
+  background: #f97316;
+  color: #fff;
+}
+
+.kp-mbar-btn.reserve {
+  background: linear-gradient(135deg, #e77819 0%, #b85203 100%);
+  color: #fff;
+}
+
+.kp-mbar-btn.whatsapp {
+  background: #10b981;
+  color: #fff;
+}
+
+.kp-mbar-dot {
+  font-size: 8px;
+}
+
+.kp-mbar-icon {
+  font-size: 13px;
+}
+
+/* ==========================================================
+   RESPONSIVE OPTIMIZATIONS FOR TABLETS & PHONE DEVICES
+   ========================================================== */
+@media (max-width: 1200px) {
+  .kp-highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 991px) {
+  .kp-top-center {
+    display: none;
+  }
+  .kp-hero-section {
+    padding: calc(var(--nav-h) + 16px) 0 30px;
+    min-height: auto;
+  }
+  .kp-hero-slide {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 20px;
+  }
+  .kp-hero-text-col {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .kp-hero-visual-col {
+    display: none;
+  }
+  .kp-mobile-dish-preview {
+    display: block;
+  }
+  .kp-hero-pricing {
+    margin: 0 auto 20px;
+  }
+  .kp-hero-ctas {
+    justify-content: center;
+    width: 100%;
+  }
+  .kp-hero-ctas a,
+  .kp-hero-ctas button {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .kp-hero-trust-strip {
+    justify-content: center;
+    width: 100%;
+  }
+  .kp-heritage-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .kp-hosp-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .kp-host-card {
+    grid-template-columns: 180px 1fr;
+  }
+  .kp-visit-grid {
+    grid-template-columns: 1fr;
+  }
+  .kp-rating-banner {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .kp-rating-left {
+    flex-direction: column;
+    text-align: center;
+  }
+  .kp-rating-score {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-right: 0;
+    padding-bottom: 16px;
+  }
+  .kp-tags-cloud {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Show fixed bottom action bar on mobile phones */
+  .kp-mobile-bar {
+    display: block;
+  }
+  body {
+    padding-bottom: 60px;
+  }
+  .icon-whatsapp1 {
+    bottom: 74px;
+  }
+  .kp-highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .kp-cat-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .kp-cat-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .kp-cat-tab {
+    flex-shrink: 0;
+  }
+  .kp-menu-grid {
+    grid-template-columns: 1fr;
+  }
+  .kp-chaats-grid {
+    grid-template-columns: 1fr;
+  }
+  .kp-host-card {
+    grid-template-columns: 1fr;
+  }
+  .kp-host-media {
+    max-height: 220px;
+  }
+  .kp-amenities-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 16px;
+  }
+  .kp-slider-controls {
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kp-top-bar-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    padding: 6px var(--px);
+  }
   .kp-top-left {
     font-size: 11px;
+    justify-content: center;
+  }
+  .kp-top-right {
+    font-size: 11px;
+    justify-content: center;
+  }
+  .kp-brand-name {
+    font-size: 20px;
+  }
+  .kp-hero-title {
+    font-size: 30px;
+  }
+  .kp-hero-ctas {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .kp-hero-ctas a,
+  .kp-hero-ctas button {
+    width: 100%;
+  }
+  .kp-hero-trust-strip {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .kp-trust-sep {
+    display: none;
+  }
+  .kp-amenities-strip {
+    grid-template-columns: 1fr;
   }
   .kp-form-row,
   .kp-form-row.three {
@@ -3995,13 +4418,19 @@ html.dark .kp-foot-title {
   .kp-chaat-cta-banner {
     flex-direction: column;
     text-align: center;
+    padding: 20px;
   }
   .kp-cta-buttons {
     width: 100%;
+    flex-direction: column;
   }
   .kp-cta-buttons a {
-    flex: 1;
+    width: 100%;
+  }
+  .kp-modal-card {
+    padding: 20px 16px;
   }
 }
+
 
 
