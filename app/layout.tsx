@@ -17,9 +17,19 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Khana Khajana | Royal Indian Cuisine & Heritage Dining',
+  title: 'Kailash Parbat | Iconic Pure Vegetarian & Chaat Heritage Since 1952 | Panampilly Nagar, Kochi',
   description:
-    'Best North Indian & Mughlai Fine Dining Restaurant. Experience 25 years of royal culinary heritage, charcoal-fired kebabs, simmering copper handis, and authentic Indian hospitality.',
+    'Experience world-famous Bombay Chaat, royal North Indian curries, sizzling Paneer Tikka, and signature Pav Bhaji at Kailash Parbat, Panampilly Nagar, Kochi. 100% Pure Vegetarian with Jain options. Rated 4.6★ on Google (373+ Reviews).',
+  keywords: [
+    'Kailash Parbat Kochi',
+    'Pure Vegetarian Restaurant Panampilly Nagar',
+    'Best Chaat in Kochi',
+    'Pav Bhaji Kochi',
+    'Chole Bhature Kochi',
+    'North Indian Restaurant Kochi',
+    'Jain Food Kochi',
+    'Kailash Parbat Menu',
+  ],
   icons: {
     icon: '/favicon.ico',
   },

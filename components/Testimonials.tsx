@@ -1,173 +1,161 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
-const starIcon = (
-  <svg viewBox="0 0 24 24">
-    <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z" />
-  </svg>
-);
+interface Review {
+  id: number;
+  author: string;
+  badge: string;
+  rating: number;
+  date: string;
+  content: string;
+  tags: string[];
+}
 
-const googleLogo = (
-  <svg className="g-mark" viewBox="0 0 48 48">
-    <path
-      fill="#4285F4"
-      d="M45 24c0-1.6-.1-2.7-.4-4H24v7.5h12c-.2 2-1.5 5-4.4 7l6.7 5.2C42.2 36 45 30.6 45 24z"
-    />
-    <path
-      fill="#34A853"
-      d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-7.1 5.5C8 41 15.4 46 24 46z"
-    />
-    <path
-      fill="#FBBC05"
-      d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7.1-5.5C2.9 17 2 20.4 2 24s.9 7 2.4 9.9l7.1-5.5z"
-    />
-    <path
-      fill="#EA4335"
-      d="M24 9.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 3.4 29.9 1 24 1 15.4 1 8 6 4.4 14.1l7.1 5.5C13.3 14.3 18.2 9.5 24 9.5z"
-    />
-  </svg>
-);
-
-const ratingsData = [
+const reviews: Review[] = [
   {
-    score: '4.8',
-    reviews: '4820',
-    badge: googleLogo,
-    source: 'Google',
+    id: 1,
+    author: 'Abhishek Katriar',
+    badge: 'Local Guide • 221 reviews • 111 photos',
+    rating: 5,
+    date: 'Recent',
+    content:
+      'Been to a number of Kailash Parbat outlets across India, but this Panampilly Nagar restaurant look and feel is completely extraordinary! The interior is superbly done, clean and comfortable. Loved the food authenticity.',
+    tags: ['Ambience', 'Interior', 'Authentic Taste'],
   },
   {
-    score: '4.7',
-    reviews: '2150',
-    badge: <span className="brand-mark zomato">Z</span>,
-    source: 'Zomato',
+    id: 2,
+    author: 'Mohandas Poyilath Variath',
+    badge: 'Verified Google Reviewer',
+    rating: 5,
+    date: 'Recent',
+    content:
+      'The service and recommendations from UDHAV NAYAK was extremely helpful and I strongly recommend Kailash Parbat to those who look for quality food, great service and cosy atmosphere.',
+    tags: ['Udhav Nayak Host', 'Hospitality', 'Cosy Atmosphere'],
   },
   {
-    score: '4.8',
-    reviews: '1320',
-    badge: <span className="brand-mark dineout">D</span>,
-    source: 'Dineout',
+    id: 3,
+    author: 'Dev Nair',
+    badge: 'Local Guide • 253 reviews • 732 photos',
+    rating: 5,
+    date: 'Recent',
+    content:
+      'Ample parking space is available which is rare in Panampilly Nagar. The food is hygienic and exceptionally tasty. The atmosphere is pleasant, and the location is excellent. Overall, a great place to visit with family.',
+    tags: ['Free Parking', 'Hygiene', 'Family Dining'],
   },
   {
-    score: '4.6',
-    reviews: '940',
-    badge: <span className="brand-mark tripadvisor">TA</span>,
-    source: 'TripAdvisor',
-  },
-];
-
-const reviews = [
-  {
-    quote:
-      'Khana Khajana is hands down the best royal Indian dining experience. The Galouti Kebabs and Dal Bukhara melted in our mouths!',
-    name: 'Priya Sharma',
+    id: 4,
+    author: 'Teena Bhandari',
+    badge: 'Verified Diner',
+    rating: 5,
+    date: 'Recent',
+    content:
+      'Kailash Parbat was such a nice surprise! Loved that they have Jain options — sooo good to find that in Kochi. Paneer tikka and paneer butter masala were super tasty. Service was really warm and quick too. Definitely going back!',
+    tags: ['Jain Options', 'Paneer Tikka', 'Quick Service'],
   },
   {
-    quote:
-      'The palace ambiance with the live chandeliers is breathtaking. Outstanding staff, royal hospitality, and five-star quality food.',
-    name: 'Vikramaditya Roy',
+    id: 5,
+    author: 'Manju Lakshminarayanan',
+    badge: 'Google Reviewer • 10 reviews',
+    rating: 5,
+    date: 'Recent',
+    content:
+      'Had been for the first time to this place. Very friendly atmosphere. Extremely tasty food! We opted for authentic chaats and hot soups. The staff took wonderful care of us.',
+    tags: ['Authentic Chaat', 'Hot Soups', 'Friendly Atmosphere'],
   },
   {
-    quote:
-      'Celebrated my parents anniversary here. The Shahi Gosht Biryani and garlic butter naan are unforgettable. Truly a treasure of flavors!',
-    name: 'Ananya Deshmukh',
-  },
-  {
-    quote:
-      'Our go-to restaurant for authentic Mughlai and North Indian cuisine. Every single dish feels like a royal banquet prepared with love.',
-    name: 'Rajesh & Chhaya Kapoor',
-  },
-  {
-    quote:
-      'From the royal Namaste greeting at the entrance to the signature saffron phirni dessert, the attention to detail is remarkable!',
-    name: 'Dr. Siddharth Verma',
+    id: 6,
+    author: 'Adarsh Kishor',
+    badge: 'Local Guide • 16 reviews',
+    rating: 5,
+    date: 'Recent',
+    content:
+      'Great place, fantastic pure vegetarian food. Nice ambiance too. Portions are generous and satisfying. Highly recommend for pure veg lovers in Kochi.',
+    tags: ['Pure Veg', 'Generous Portions', 'Great Ambiance'],
   },
 ];
 
 export default function Testimonials() {
+  const [activeIdx, setActiveIdx] = useState(0);
+
   return (
-    <section className="says" id="says">
-      <img
-        src="/img/kk_cart_art.jpg"
-        className="cart-bg"
-        alt="Vintage royal spice cart illustration"
-      />
-
-      <div className="says-head">
-        <h2 className="dsp d2">
-          What Our <br />
-          Guests are saying
-          <br />
-          <span className="test-b">
-            Treasured Memories, Unfiltered Love from Our Tables.
-          </span>
-        </h2>
-
-        <div className="rate-row">
-          {ratingsData.map((r, idx) => (
-            <div className="rate" key={idx}>
-              <div className="rate-top">
-                <div className="stars">
-                  {starIcon}
-                  {starIcon}
-                  {starIcon}
-                  {starIcon}
-                  {starIcon}
-                </div>
-                {r.badge}
+    <section id="reviews" className="kp-reviews-section" aria-label="Guest Reviews">
+      <div className="kp-container">
+        {/* Rating Banner */}
+        <div className="kp-rating-banner">
+          <div className="kp-rating-left">
+            <div className="kp-rating-score">
+              <span className="score-num">4.6</span>
+              <div className="score-stars">
+                <span>★★★★★</span>
+                <small>373+ Verified Google Reviews</small>
               </div>
-              <div className="rate-bot">
-                <div className="rate-num">
-                  {r.score}
-                  <sup>/5</sup>
+            </div>
+            <div className="kp-rating-vibe">
+              <span className="vibe-title">Google Verified Dining Destination</span>
+              <p className="vibe-summary">
+                &ldquo;Diners like this restaurant&apos;s authentic vegetarian food, including chaat items, and appreciate
+                the wide variety of dishes available. They also highlight the clean and welcoming ambiance, along with the
+                quick and attentive service from host Udhav Nayak and staff. Many mention the ample parking space.&rdquo;
+              </p>
+            </div>
+          </div>
+
+          <div className="kp-rating-right">
+            <div className="kp-tags-cloud">
+              <span className="kp-tag-chip active">Chaats (24+)</span>
+              <span className="kp-tag-chip">Authentic North Indian (6+)</span>
+              <span className="kp-tag-chip">Ambience (16+)</span>
+              <span className="kp-tag-chip">Hospitality (10+)</span>
+              <span className="kp-tag-chip">Polite Staff (8+)</span>
+              <span className="kp-tag-chip">Dahi Puri (4+)</span>
+              <span className="kp-tag-chip">Rabri (2+)</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Section Heading */}
+        <div className="kp-center-header">
+          <div className="kp-section-tag">
+            <span className="kp-tag-line">VOICES OF KOCHI</span>
+            <span className="kp-tag-pill">REAL EXPERIENCES</span>
+          </div>
+          <h2 className="kp-section-title">
+            Loved by Diners Across <span className="kp-gold-text">Kerala & Beyond</span>
+          </h2>
+        </div>
+
+        {/* Reviews Grid */}
+        <div className="kp-reviews-grid">
+          {reviews.map((rev, i) => (
+            <div
+              key={rev.id}
+              className={`kp-review-card ${i === activeIdx ? 'highlight' : ''}`}
+              onMouseEnter={() => setActiveIdx(i)}
+            >
+              <div className="kp-card-top">
+                <div className="kp-author-avatar">
+                  {rev.author.charAt(0)}
                 </div>
-                <div className="rate-meta">
-                  <b>Excellent</b>Based on {r.reviews} reviews
+                <div className="kp-author-info">
+                  <h4 className="kp-author-name">{rev.author}</h4>
+                  <span className="kp-author-badge">{rev.badge}</span>
                 </div>
+                <div className="kp-card-stars">★★★★★</div>
+              </div>
+
+              <p className="kp-review-text">&ldquo;{rev.content}&rdquo;</p>
+
+              <div className="kp-review-chips">
+                {rev.tags.map((t, idx) => (
+                  <span key={idx} className="kp-chip">
+                    #{t}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Infinite scrolling marquee of quote cards */}
-      <div className="mq">
-        <div className="mq-in">
-          {[...reviews, ...reviews].map((rev, idx) => (
-            <article className="qcard" key={idx}>
-              <div className="qcard-top">
-                <div className="stars">
-                  {starIcon}
-                  {starIcon}
-                  {starIcon}
-                  {starIcon}
-                  {starIcon}
-                </div>
-                <span className="src">Verified Diner</span>
-              </div>
-              <blockquote>{rev.quote}</blockquote>
-              <div className="who">
-                <small>Guest</small>
-                {rev.name}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <div className="says-foot">
-        <p>
-          Have you dined with us at Khana Khajana and left
-          <br />
-          with treasured memories?
-        </p>
-        <a
-          href="https://google.com"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Share your review with us!
-        </a>
       </div>
     </section>
   );

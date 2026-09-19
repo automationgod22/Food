@@ -3,10 +3,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
+import ReservationModal from '@/components/ReservationModal';
 
 export default function Header() {
   const [isStuck, setIsStuck] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isResOpen, setIsResOpen] = useState(false);
+  const [isOrderDropdown, setIsOrderDropdown] = useState(false);
   const [waveCx, setWaveCx] = useState(925);
   const targetCxRef = useRef(925);
   const currentCxRef = useRef(925);
@@ -20,7 +23,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 30) {
         setIsStuck(true);
       } else {
         setIsStuck(false);
@@ -71,6 +74,43 @@ export default function Header() {
 
   return (
     <>
+      {/* Top Heritage Info Bar */}
+      <div className="kp-top-bar">
+        <div className="kp-top-bar-inner">
+          <div className="kp-top-left">
+            <span className="kp-top-badge">ESTD 1952</span>
+            <span className="kp-top-text">
+              📍 Panampilly Nagar, Kochi • Open Daily 11:30 AM – 11:00 PM
+            </span>
+          </div>
+          <div className="kp-top-center">
+            <span className="kp-pure-veg-pill">🌱 100% PURE VEGETARIAN & JAIN SPECIALTIES</span>
+          </div>
+          <div className="kp-top-right">
+            <span className="kp-google-badge">★ 4.6 (373+ Google Reviews)</span>
+            <div className="kp-top-order-links">
+              <a
+                href="https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order"
+                target="_blank"
+                rel="noreferrer"
+                className="kp-top-link zomato"
+              >
+                Zomato
+              </a>
+              <span className="kp-top-sep">•</span>
+              <a
+                href="https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder"
+                target="_blank"
+                rel="noreferrer"
+                className="kp-top-link swiggy"
+              >
+                Swiggy
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <header
         id="hdr"
         ref={headerRef}
@@ -78,29 +118,26 @@ export default function Header() {
         onMouseLeave={handleMouseLeaveNav}
       >
         <nav className="nav">
+          {/* Left navigation links */}
           <ul className="l">
             <li>
-              <Link href="#catering" onMouseEnter={handleMouseEnterItem}>
-                ABOUT US
+              <Link href="#heritage" onMouseEnter={handleMouseEnterItem}>
+                OUR HERITAGE
               </Link>
             </li>
             <li>
-              <Link href="#rooted" onMouseEnter={handleMouseEnterItem}>
-                MENU
+              <Link href="#chaats" onMouseEnter={handleMouseEnterItem}>
+                LEGENDARY CHAAT
               </Link>
             </li>
             <li>
-              <Link href="#spirit" onMouseEnter={handleMouseEnterItem}>
-                GALLERY
-              </Link>
-            </li>
-            <li>
-              <Link href="#says" onMouseEnter={handleMouseEnterItem}>
-                AWARDS & MEDIA
+              <Link href="#menu" onMouseEnter={handleMouseEnterItem}>
+                EXPLORE MENU
               </Link>
             </li>
           </ul>
 
+          {/* Mobile hamburger button */}
           <button
             className={`burger ${isMenuOpen ? 'open' : ''}`}
             id="burger"
@@ -113,79 +150,92 @@ export default function Header() {
             <i></i>
           </button>
 
+          {/* Center Brand Logo */}
           <Link
             href="/"
             className="brand"
             onMouseEnter={handleMouseEnterItem}
-            aria-label="Khana Khajana Home"
+            aria-label="Kailash Parbat Home"
           >
-            <div className="kk-brand-wrap">
-              <span className="kk-brand-name">Khana Khajana</span>
-              <span className="kk-brand-sub">ROYAL INDIAN CUISINE</span>
+            <div className="kp-brand-wrap">
+              <div className="kp-brand-crest">
+                <span className="kp-crest-crown">⚜</span>
+                <span className="kp-crest-yr">1952</span>
+              </div>
+              <span className="kp-brand-name">Kailash Parbat</span>
+              <span className="kp-brand-sub">TASTE OF TRADITION • KOCHI</span>
             </div>
           </Link>
 
+          {/* Right navigation links */}
           <ul className="r">
             <li>
-              <Link href="#locations" onMouseEnter={handleMouseEnterItem}>
-                OUR LOCATIONS
+              <Link href="#hospitality" onMouseEnter={handleMouseEnterItem}>
+                HOSPITALITY
               </Link>
             </li>
             <li>
-              <Link href="#locations" onMouseEnter={handleMouseEnterItem}>
-                GROW WITH US
+              <Link href="#reviews" onMouseEnter={handleMouseEnterItem}>
+                REVIEWS
               </Link>
             </li>
-            <li>
-              <a
-                href="https://www.instagram.com"
-                className="acct"
-                aria-label="Instagram"
-                target="_blank"
-                rel="noreferrer"
+            <li className="kp-nav-cta-item">
+              <button
+                onClick={() => setIsResOpen(true)}
+                className="kp-header-reserve-btn"
                 onMouseEnter={handleMouseEnterItem}
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="insta-svg"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
+                BOOK A TABLE
+              </button>
+            </li>
+            <li className="kp-order-rel">
+              <button
+                onClick={() => setIsOrderDropdown(!isOrderDropdown)}
+                className="kp-order-now-btn"
+                onMouseEnter={handleMouseEnterItem}
+              >
+                ORDER ONLINE ▾
+              </button>
+              {isOrderDropdown && (
+                <div className="kp-order-popover">
+                  <a
+                    href="https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="kp-pop-link zomato"
+                    onClick={() => setIsOrderDropdown(false)}
+                  >
+                    <span className="kp-pop-badge red">Zomato</span>
+                    <span className="kp-pop-desc">Order to Panampilly Nagar & Kochi</span>
+                  </a>
+                  <a
+                    href="https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="kp-pop-link swiggy"
+                    onClick={() => setIsOrderDropdown(false)}
+                  >
+                    <span className="kp-pop-badge orange">Swiggy</span>
+                    <span className="kp-pop-desc">Fast 30-min Delivery to your door</span>
+                  </a>
+                </div>
+              )}
             </li>
             <li>
               <ThemeToggle />
             </li>
           </ul>
 
-          <a
-            href="https://www.instagram.com"
-            className="m-cta"
-            aria-label="Instagram"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              className="insta-svg"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {/* Mobile direct order button */}
+          <div className="m-cta-group">
+            <button
+              onClick={() => setIsResOpen(true)}
+              className="m-book-btn"
+              aria-label="Book Table"
             >
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
+              Book
+            </button>
+          </div>
         </nav>
 
         <div className="nav-wave" id="navWave" aria-hidden="true">
@@ -197,6 +247,10 @@ export default function Header() {
 
       {/* Mobile Drawer Overlay */}
       <div className={`ovl ${isMenuOpen ? 'open' : ''}`} id="ovl">
+        <div className="ovl-brand-bar">
+          <span className="ovl-brand-title">Kailash Parbat</span>
+          <span className="ovl-brand-sub">Panampilly Nagar, Kochi</span>
+        </div>
         <ul>
           <li>
             <Link href="/" onClick={() => setIsMenuOpen(false)}>
@@ -204,48 +258,78 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="#catering" onClick={() => setIsMenuOpen(false)}>
-              About Us
+            <Link href="#heritage" onClick={() => setIsMenuOpen(false)}>
+              Our Heritage (Since 1952)
             </Link>
           </li>
           <li>
-            <Link href="#rooted" onClick={() => setIsMenuOpen(false)}>
-              Menu
+            <Link href="#chaats" onClick={() => setIsMenuOpen(false)}>
+              Legendary Chaat Bar
             </Link>
           </li>
           <li>
-            <Link href="#spirit" onClick={() => setIsMenuOpen(false)}>
-              Gallery
+            <Link href="#menu" onClick={() => setIsMenuOpen(false)}>
+              Full Menu & Combos
             </Link>
           </li>
           <li>
-            <Link href="#says" onClick={() => setIsMenuOpen(false)}>
-              Awards & Media
+            <Link href="#hospitality" onClick={() => setIsMenuOpen(false)}>
+              Ambience & Hospitality
             </Link>
           </li>
           <li>
-            <Link href="#locations" onClick={() => setIsMenuOpen(false)}>
-              Our Locations
+            <Link href="#reviews" onClick={() => setIsMenuOpen(false)}>
+              Guest Reviews (4.6★)
             </Link>
           </li>
           <li>
-            <Link href="#locations" onClick={() => setIsMenuOpen(false)}>
-              Grow With Us
+            <Link href="#visit" onClick={() => setIsMenuOpen(false)}>
+              Location & Timings
             </Link>
           </li>
         </ul>
 
-        <div className="ovl-actions" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <a
-            href="#locations"
+        <div className="ovl-delivery-links">
+          <p className="ovl-del-title">Order Direct to Your Doorstep:</p>
+          <div className="ovl-del-btns">
+            <a
+              href="https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order"
+              target="_blank"
+              rel="noreferrer"
+              className="ovl-app-btn zomato"
+            >
+              Order on Zomato
+            </a>
+            <a
+              href="https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder"
+              target="_blank"
+              rel="noreferrer"
+              className="ovl-app-btn swiggy"
+            >
+              Order on Swiggy
+            </a>
+          </div>
+        </div>
+
+        <div className="ovl-actions">
+          <button
+            onClick={() => {
+              setIsMenuOpen(false);
+              setIsResOpen(true);
+            }}
             className="btn-x"
-            onClick={() => setIsMenuOpen(false)}
           >
             Reserve a Table
-          </a>
+          </button>
           <ThemeToggle />
         </div>
       </div>
+
+      {/* Interactive Reservation Modal */}
+      <ReservationModal
+        isOpen={isResOpen}
+        onClose={() => setIsResOpen(false)}
+      />
     </>
   );
 }

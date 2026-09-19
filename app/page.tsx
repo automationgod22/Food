@@ -1,26 +1,36 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Header from '@/components/Header';
 import HeroSlider from '@/components/HeroSlider';
-import SpiritSection from '@/components/SpiritSection';
-import CateringSection from '@/components/CateringSection';
-import RootedSection from '@/components/RootedSection';
+import HeritageSection from '@/components/HeritageSection';
+import SignatureChaats from '@/components/SignatureChaats';
+import MenuSection from '@/components/MenuSection';
+import HospitalitySection from '@/components/HospitalitySection';
 import Testimonials from '@/components/Testimonials';
+import VisitSection from '@/components/VisitSection';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import ReservationModal from '@/components/ReservationModal';
 
 export default function HomePage() {
+  const [isResOpen, setIsResOpen] = useState(false);
+
   return (
     <>
       <Header />
       <main id="top">
         <HeroSlider />
-        <SpiritSection />
-        <CateringSection />
-        <RootedSection />
+        <HeritageSection />
+        <SignatureChaats />
+        <MenuSection />
+        <HospitalitySection onOpenReservation={() => setIsResOpen(true)} />
         <Testimonials />
+        <VisitSection onOpenReservation={() => setIsResOpen(true)} />
       </main>
-      <Footer />
+      <Footer onOpenReservation={() => setIsResOpen(true)} />
       <FloatingWhatsApp />
+      <ReservationModal isOpen={isResOpen} onClose={() => setIsResOpen(false)} />
     </>
   );
 }

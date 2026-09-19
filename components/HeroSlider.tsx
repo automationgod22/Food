@@ -1,55 +1,105 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 interface Slide {
+  id: number;
+  tagline: string;
+  title: string;
+  highlight: string;
+  subtitle: string;
+  badge: string;
+  priceTag?: string;
   image: string;
-  title: React.ReactNode;
-  copy: string;
-  alt: string;
+  primaryCtaText: string;
+  primaryCtaLink: string;
+  secondaryCtaText: string;
+  secondaryCtaLink: string;
 }
 
 const slides: Slide[] = [
   {
-    image: '/img/kk_banner_palace.jpg',
-    title: (
-      <>
-        Royal Flavors
-        <br />
-        Timeless Heritage
-      </>
-    ),
-    copy: 'Step into an atmosphere that celebrates the opulent soul of India — a harmonious blend of royal palace architecture, soothing amber ambience, and heartfelt hospitality that treats every guest like royalty.',
-    alt: 'Khana Khajana royal dining hall',
+    id: 1,
+    tagline: 'SINCE 1952 • ICONIC BOMBAY STREET FOOD',
+    title: 'World-Famous',
+    highlight: 'Butter Pav Bhaji',
+    subtitle:
+      'Slow-simmered spiced vegetable medley finished with pure dollops of butter curls, accompanied by warm, fluffy buttered pav rolls. A recipe perfected over 70 years.',
+    badge: 'Signature House Special',
+    priceTag: 'Starting at ₹329',
+    image: '/kp/photos/5.png',
+    primaryCtaText: 'Order on Zomato',
+    primaryCtaLink: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
+    secondaryCtaText: 'Explore Menu',
+    secondaryCtaLink: '#menu',
   },
   {
-    image: '/img/kk_banner_feast.jpg',
-    title: (
-      <>
-        <span style={{ fontFamily: 'inherit' }}>25 </span>Years of Culinary
-        <br />
-        Majesty
-      </>
-    ),
-    copy: 'From slow-cooked saffron biryanis to copper handis simmering with rich gravies, every recipe is a time-honored treasure from royal Indian kitchens.',
-    alt: 'Royal Indian culinary feast',
+    id: 2,
+    tagline: 'ROYAL TANDOOR & MUGHLAI HERITAGE',
+    title: 'Sizzling Charcoal',
+    highlight: 'Paneer Tikka',
+    subtitle:
+      'Tender malai cottage cheese marinated in crushed whole spices and Greek-style curd, roasted in clay tandoors to smoky perfection with tangy mint-coriander chutney.',
+    badge: 'Chef Recommended',
+    priceTag: '₹439.00',
+    image: '/kp/photos/14.jpg',
+    primaryCtaText: 'Order on Swiggy',
+    primaryCtaLink:
+      'https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder',
+    secondaryCtaText: 'View Starters',
+    secondaryCtaLink: '#menu',
   },
   {
-    image: '/img/kk_banner_lounge.jpg',
-    title: (
-      <>
-        One Table.
-        <br />
-        Countless Treasures.
-      </>
-    ),
-    copy: 'An authentic royal dining journey. Succulent charcoal-grilled kebabs, artisanal naans, and botanical infusions crafted to delight your senses and create timeless memories.',
-    alt: 'Khana Khajana lounge experience',
+    id: 3,
+    tagline: 'LEGENDARY SINDHI & BOMBAY CHAAT',
+    title: 'Crispy Regal',
+    highlight: 'Dahi Puri & Chaat',
+    subtitle:
+      'Golden puffed puris bursting with spiced potato-chickpea mash, chilled churned yogurt, sweet tamarind glaze, spicy mint pani, and crisp fine sev.',
+    badge: '1952 Classic',
+    priceTag: '₹229.00',
+    image: '/kp/photos/8.jpg',
+    primaryCtaText: 'Discover Chaat Bar',
+    primaryCtaLink: '#chaats',
+    secondaryCtaText: 'Order Online',
+    secondaryCtaLink: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
+  },
+  {
+    id: 4,
+    tagline: 'THE ORIGINAL MUMBAI SOUL FOOD',
+    title: 'Authentic Street',
+    highlight: 'Bombay Vada Pav',
+    subtitle:
+      'Golden spiced batata fritters hugged by pillowy pav buns, coated with fiery roasted garlic chutney and served with blistered salted green chilies.',
+    badge: 'Mumbai Legend',
+    priceTag: '2 Pcs • ₹199',
+    image: '/kp/photos/7.jpg',
+    primaryCtaText: 'Order on Zomato',
+    primaryCtaLink: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
+    secondaryCtaText: 'Full Menu',
+    secondaryCtaLink: '#menu',
+  },
+  {
+    id: 5,
+    tagline: 'NORTH INDIAN MAJESTIC CURRIES',
+    title: 'Rich & Velvety',
+    highlight: 'Paneer Tikka Lababdar',
+    subtitle:
+      'Grilled cottage cheese cubes simmered in our signature simmered tomato-cashew satin gravy, enriched with aromatic dried fenugreek leaves and saffron butter.',
+    badge: 'All-Time Favorite',
+    priceTag: '₹449.00',
+    image: '/kp/photos/2.jpg',
+    primaryCtaText: 'Order on Swiggy',
+    primaryCtaLink:
+      'https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder',
+    secondaryCtaText: 'Book Table',
+    secondaryCtaLink: '#hospitality',
   },
 ];
 
 export default function HeroSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -57,84 +107,163 @@ export default function HeroSlider() {
     if (isPaused) return;
 
     timerRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % slides.length);
-    }, 6500);
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 6000);
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [isPaused]);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  const goToSlide = (idx: number) => {
+    setCurrent(idx);
+    if (timerRef.current) clearInterval(timerRef.current);
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % slides.length);
+  const nextSlide = () => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
   return (
     <section
-      className="hslide-stage"
-      id="heroSlides"
-      aria-label="Featured"
+      className="kp-hero-section"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      aria-label="Kailash Parbat Showcase"
     >
-      {slides.map((slide, idx) => (
-        <div
-          key={idx}
-          className={`hslide ${idx === currentIndex ? 'on' : ''}`}
-          data-slide
-        >
-          <img
-            className="hslide-bg"
-            src={slide.image}
-            alt={slide.alt}
-          />
-          <div className="hslide-veil"></div>
-          <div className="hslide-content">
-            <div className="hslide-head">
-              <h1 className="dsp d1">{slide.title}</h1>
-            </div>
-            <div className="hslide-bottom-right">
-              <p className="hslide-copy">{slide.copy}</p>
-              <div className="hslide-dots" id="hsDots">
-                {slides.map((_, dotIdx) => (
-                  <button
-                    key={dotIdx}
-                    className={`hslide-dot ${dotIdx === currentIndex ? 'on' : ''}`}
-                    aria-label={`Go to slide ${dotIdx + 1}`}
-                    onClick={() => setCurrentIndex(dotIdx)}
+      {/* Background Ambience Layers */}
+      <div className="kp-hero-glow glow-1"></div>
+      <div className="kp-hero-glow glow-2"></div>
+
+      <div className="kp-hero-container">
+        {slides.map((slide, idx) => {
+          const isActive = idx === current;
+          return (
+            <div
+              key={slide.id}
+              className={`kp-hero-slide ${isActive ? 'active' : ''}`}
+              aria-hidden={!isActive}
+            >
+              {/* Left Content Column */}
+              <div className="kp-hero-text-col">
+                <div className="kp-hero-tag-wrap">
+                  <span className="kp-hero-tag-line">{slide.tagline}</span>
+                  {slide.badge && <span className="kp-hero-badge-pill">{slide.badge}</span>}
+                </div>
+
+                <h1 className="kp-hero-title">
+                  {slide.title} <br />
+                  <span className="kp-hero-highlight">{slide.highlight}</span>
+                </h1>
+
+                <p className="kp-hero-desc">{slide.subtitle}</p>
+
+                {slide.priceTag && (
+                  <div className="kp-hero-pricing">
+                    <span className="kp-price-label">Heritage Recipe:</span>
+                    <span className="kp-price-value">{slide.priceTag}</span>
+                    <span className="kp-price-note">100% Pure Veg</span>
+                  </div>
+                )}
+
+                <div className="kp-hero-ctas">
+                  <a
+                    href={slide.primaryCtaLink}
+                    target={slide.primaryCtaLink.startsWith('http') ? '_blank' : '_self'}
+                    rel="noreferrer"
+                    className="kp-btn-gold"
+                  >
+                    {slide.primaryCtaText}
+                    <svg viewBox="0 0 20 20" fill="currentColor" className="kp-btn-arrow">
+                      <path
+                        fillRule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                  <Link href={slide.secondaryCtaLink} className="kp-btn-outline">
+                    {slide.secondaryCtaText}
+                  </Link>
+                </div>
+
+                {/* Trust Badges */}
+                <div className="kp-hero-trust-strip">
+                  <div className="kp-trust-item">
+                    <span className="kp-trust-icon">★</span>
+                    <div>
+                      <strong>4.6 / 5.0 Rating</strong>
+                      <small>373+ Verified Google Reviews</small>
+                    </div>
+                  </div>
+                  <div className="kp-trust-sep"></div>
+                  <div className="kp-trust-item">
+                    <span className="kp-trust-icon">🌿</span>
+                    <div>
+                      <strong>100% Pure Vegetarian</strong>
+                      <small>Dedicated Jain Kitchen Preparation</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Visual Column */}
+              <div className="kp-hero-visual-col">
+                <div className="kp-visual-frame">
+                  <div className="kp-frame-decor"></div>
+                  <img
+                    src={slide.image}
+                    alt={`${slide.title} ${slide.highlight} - Kailash Parbat`}
+                    className="kp-hero-img"
+                    loading={idx === 0 ? 'eager' : 'lazy'}
                   />
-                ))}
+                  <div className="kp-img-overlay-card">
+                    <span className="kp-overlay-sparkle">✨</span>
+                    <div>
+                      <strong>Panampilly Nagar, Kochi</strong>
+                      <span>Freshly prepared on order</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      ))}
+          );
+        })}
+      </div>
 
-      {/* Navigation Arrows */}
-      <div className="hslide-nav">
+      {/* Slider Controls */}
+      <div className="kp-slider-controls">
         <button
-          className="hslide-arrow"
-          id="hsPrev"
-          aria-label="Previous slide"
-          onClick={handlePrev}
+          onClick={prevSlide}
+          className="kp-ctrl-btn prev"
+          aria-label="Previous Slide"
         >
-          <svg viewBox="0 0 24 24">
-            <path d="M15 5l-7 7 7 7" />
-          </svg>
+          ‹
         </button>
+
+        <div className="kp-dots-track">
+          {slides.map((s, i) => (
+            <button
+              key={s.id}
+              onClick={() => goToSlide(i)}
+              className={`kp-dot ${i === current ? 'active' : ''}`}
+              aria-label={`Go to slide ${i + 1}`}
+            >
+              <span className="kp-dot-fill"></span>
+            </button>
+          ))}
+        </div>
+
         <button
-          className="hslide-arrow"
-          id="hsNext"
-          aria-label="Next slide"
-          onClick={handleNext}
+          onClick={nextSlide}
+          className="kp-ctrl-btn next"
+          aria-label="Next Slide"
         >
-          <svg viewBox="0 0 24 24">
-            <path d="M9 5l7 7-7 7" />
-          </svg>
+          ›
         </button>
       </div>
     </section>
