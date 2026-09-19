@@ -13,8 +13,8 @@ export default function HospitalitySection({ onOpenReservation }: HospitalitySec
         {/* Section Header */}
         <div className="kp-center-header">
           <div className="kp-section-tag">
-            <span className="kp-tag-line">PANAMPILLY NAGAR, KOCHI</span>
-            <span className="kp-tag-pill">WORLD-CLASS COMFORT</span>
+            <span className="kp-tag-line">Panampilly Nagar, Kochi</span>
+            <span className="kp-tag-pill">World-Class Comfort</span>
           </div>
           <h2 className="kp-section-title">
             Exceptional Hospitality & <span className="kp-gold-text">Luxury Ambience</span>
@@ -41,7 +41,7 @@ export default function HospitalitySection({ onOpenReservation }: HospitalitySec
             </div>
 
             <div className="kp-host-info">
-              <span className="kp-host-role">RESTAURANT MANAGER & HOST</span>
+              <span className="kp-host-role">Restaurant Manager & Host</span>
               <h3 className="kp-host-name">Udhav Nayak</h3>
               <blockquote className="kp-host-quote">
                 &ldquo;At Kailash Parbat Panampilly Nagar, our greatest joy is welcoming every guest as family.
@@ -77,7 +77,7 @@ export default function HospitalitySection({ onOpenReservation }: HospitalitySec
 
             <div className="kp-ambience-body">
               <div className="kp-regal-badge-row">
-                <span className="kp-regal-badge">ROYAL COMFORT</span>
+                <span className="kp-regal-badge">Royal Comfort</span>
                 <span className="kp-regal-stars">★★★★★ 4.6/5 Diner Rating</span>
               </div>
               <h3 className="kp-ambience-title">The Regal Dining Experience</h3>

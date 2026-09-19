@@ -24,7 +24,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    tagline: 'SINCE 1952 • ICONIC BOMBAY STREET FOOD',
+    tagline: 'Since 1952 • Iconic Bombay Street Food',
     title: 'World-Famous',
     highlight: 'Butter Pav Bhaji',
     subtitle:
@@ -39,7 +39,7 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    tagline: 'ROYAL TANDOOR & MUGHLAI HERITAGE',
+    tagline: 'Royal Tandoor & Mughlai Heritage',
     title: 'Sizzling Charcoal',
     highlight: 'Paneer Tikka',
     subtitle:
@@ -55,7 +55,7 @@ const slides: Slide[] = [
   },
   {
     id: 3,
-    tagline: 'LEGENDARY SINDHI & BOMBAY CHAAT',
+    tagline: 'Legendary Sindhi & Bombay Chaat',
     title: 'Grand Royal',
     highlight: 'KP Chaat Platter',
     subtitle:
@@ -70,7 +70,7 @@ const slides: Slide[] = [
   },
   {
     id: 4,
-    tagline: 'THE ORIGINAL MUMBAI SOUL FOOD',
+    tagline: 'The Original Mumbai Soul Food',
     title: 'Authentic Street',
     highlight: 'Bombay Wada Pav (2 Pcs)',
     subtitle:
@@ -86,7 +86,7 @@ const slides: Slide[] = [
   },
   {
     id: 5,
-    tagline: 'NORTH INDIAN MAJESTIC CURRIES',
+    tagline: 'North Indian Majestic Curries',
     title: 'Rich & Velvety',
     highlight: 'Paneer Tikka Lababdar',
     subtitle:

@@ -91,13 +91,13 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
       <div className="kp-top-bar">
         <div className="kp-top-bar-inner">
           <div className="kp-top-left">
-            <span className="kp-top-badge">ESTD 1952</span>
+            <span className="kp-top-badge">Estd 1952</span>
             <span className="kp-top-text">
               📍 Panampilly Nagar, Kochi • Open Daily 11:30 AM – 11:00 PM
             </span>
           </div>
           <div className="kp-top-center">
-            <span className="kp-pure-veg-pill">🌱 100% PURE VEGETARIAN & JAIN SPECIALTIES</span>
+            <span className="kp-pure-veg-pill">🌱 100% Pure Vegetarian & Jain Specialties</span>
           </div>
           <div className="kp-top-right">
             <span className="kp-google-badge">★ 4.6 (373+ Google Reviews)</span>
@@ -135,12 +135,12 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
           <ul className="l">
             <li>
               <Link href="#heritage" onMouseEnter={handleMouseEnterItem}>
-                OUR HERITAGE
+                Our Heritage
               </Link>
             </li>
             <li>
               <Link href="#chaats" onMouseEnter={handleMouseEnterItem}>
-                LEGENDARY CHAAT
+                Legendary Chaat
               </Link>
             </li>
             <li>
@@ -150,11 +150,11 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
                   className="kp-nav-menu-btn"
                   onMouseEnter={handleMouseEnterItem}
                 >
-                  EXPLORE MENU
+                  Explore Menu
                 </button>
               ) : (
                 <Link href="#menu" onMouseEnter={handleMouseEnterItem}>
-                  EXPLORE MENU
+                  Explore Menu
                 </Link>
               )}
             </li>
@@ -186,7 +186,7 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
                 <span className="kp-crest-yr">1952</span>
               </div>
               <span className="kp-brand-name">Kailash Parbat</span>
-              <span className="kp-brand-sub">TASTE OF TRADITION • KOCHI</span>
+              <span className="kp-brand-sub kp-script-accent">Taste of Tradition • Kochi</span>
             </div>
           </Link>
 
@@ -194,12 +194,12 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
           <ul className="r">
             <li>
               <Link href="#hospitality" onMouseEnter={handleMouseEnterItem}>
-                HOSPITALITY
+                Hospitality
               </Link>
             </li>
             <li>
               <Link href="#reviews" onMouseEnter={handleMouseEnterItem}>
-                REVIEWS
+                Reviews
               </Link>
             </li>
             <li className="kp-nav-cta-item">
@@ -208,7 +208,7 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
                 className="kp-header-reserve-btn"
                 onMouseEnter={handleMouseEnterItem}
               >
-                BOOK A TABLE
+                Book a Table
               </button>
             </li>
             <li className="kp-order-rel">
@@ -217,7 +217,7 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
                 className="kp-order-now-btn"
                 onMouseEnter={handleMouseEnterItem}
               >
-                ORDER ONLINE ▾
+                Order Online ▾
               </button>
               {isOrderDropdown && (
                 <div className="kp-order-popover">

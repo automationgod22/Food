@@ -1,17 +1,24 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Poppins } from 'next/font/google';
+import { Fraunces, Great_Vibes, Outfit } from 'next/font/google';
 import './globals.css';
 
-const cormorant = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--ff-d',
   display: 'swap',
 });
 
-const poppins = Poppins({
+const greatVibes = Great_Vibes({
+  weight: '400',
   subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600'],
+  variable: '--ff-script',
+  display: 'swap',
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--ff-b',
   display: 'swap',
 });
@@ -41,7 +48,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${poppins.variable}`}>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${outfit.variable} ${greatVibes.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

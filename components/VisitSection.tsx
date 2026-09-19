@@ -14,8 +14,8 @@ export default function VisitSection({ onOpenReservation }: VisitSectionProps) {
           {/* Left Column: Address, Hours, Delivery Cards */}
           <div className="kp-visit-details">
             <div className="kp-section-tag">
-              <span className="kp-tag-line">PLAN YOUR VISIT</span>
-              <span className="kp-tag-pill">FLAGSHIP RESTAURANT</span>
+              <span className="kp-tag-line">Plan Your Visit</span>
+              <span className="kp-tag-pill">Flagship Restaurant</span>
             </div>
 
             <h2 className="kp-section-title">

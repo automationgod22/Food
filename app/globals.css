@@ -12,8 +12,9 @@
   --gold: #E0913E;
   --coral: #E7907A;
 
-  --ff-d: var(--ff-d), 'Cormorant Garamond', Georgia, serif;
-  --ff-b: var(--ff-b), 'Poppins', system-ui, sans-serif;
+  --ff-d: var(--ff-d), 'Fraunces', Georgia, serif;
+  --ff-b: var(--ff-b), 'Outfit', system-ui, sans-serif;
+  --ff-script: var(--ff-script), 'Great Vibes', cursive;
 
   --nav-h: 76px;
   --px: clamp(20px, 3.8vw, 64px);
@@ -64,10 +65,10 @@ a {
    ========================================================== */
 .dsp {
   font-family: var(--ff-d);
-  font-weight: 400;
-  text-transform: uppercase;
-  line-height: 1.05;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  text-transform: none;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
 }
 
 .d1 {
@@ -174,10 +175,10 @@ a {
 
 .nav ul a {
   position: relative;
-  font-size: 12.5px;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: #ffffff;
   transition: color 0.3s;
   padding: 6px 0;
@@ -1947,31 +1948,33 @@ html.dark .kp-hero-section {
 }
 
 .kp-hero-tag-line {
-  font-size: 11px;
+  font-size: 13.5px;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.04em;
   color: var(--orange);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .kp-hero-badge-pill {
   background: rgba(231, 120, 25, 0.12);
   color: var(--orange);
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 600;
-  padding: 3px 9px;
+  padding: 4px 10px;
   border-radius: 12px;
   border: 1px solid rgba(231, 120, 25, 0.3);
+  text-transform: none;
 }
 
 .kp-hero-title {
   font-family: var(--ff-d);
-  font-size: clamp(44px, 5.4vw, 84px);
-  line-height: 1.06;
+  font-size: clamp(42px, 5.2vw, 82px);
+  line-height: 1.08;
   font-weight: 700;
   color: var(--dark);
   margin-bottom: 20px;
-  text-transform: uppercase;
+  text-transform: none;
+  letter-spacing: -0.015em;
 }
 
 html.dark .kp-hero-title {
@@ -1980,7 +1983,13 @@ html.dark .kp-hero-title {
 
 .kp-hero-highlight {
   color: var(--orange);
-  font-style: italic;
+  font-family: var(--ff-script), 'Fraunces', cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.15em;
+  letter-spacing: 0.02em;
+  display: inline-block;
+  padding: 0 4px;
 }
 
 .kp-hero-desc {
@@ -2297,32 +2306,32 @@ html.dark .kp-heritage-section {
 }
 
 .kp-tag-line {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--orange);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .kp-tag-pill {
   background: rgba(231, 120, 25, 0.1);
   color: var(--orange);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
   border-radius: 4px;
-  letter-spacing: 0.08em;
+  text-transform: none;
 }
 
 .kp-section-title {
   font-family: var(--ff-d);
-  font-size: clamp(36px, 4.4vw, 64px);
-  line-height: 1.1;
+  font-size: clamp(34px, 4.2vw, 58px);
+  line-height: 1.15;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: none;
   margin-bottom: 22px;
   color: var(--dark);
-  letter-spacing: 0.02em;
+  letter-spacing: -0.015em;
 }
 
 html.dark .kp-section-title {
@@ -2331,6 +2340,21 @@ html.dark .kp-section-title {
 
 .kp-gold-text {
   color: var(--orange);
+  font-family: var(--ff-script), 'Fraunces', cursive;
+  font-weight: 400;
+  font-size: 1.18em;
+  letter-spacing: 0.02em;
+  display: inline-block;
+  padding: 0 4px;
+}
+
+.kp-script-accent {
+  font-family: var(--ff-script), cursive;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  font-size: 1.12em;
+  line-height: 1.1;
+  display: inline-block;
 }
 
 .kp-lead-text {
@@ -2419,10 +2443,11 @@ html.dark .kp-stats-row {
 }
 
 .kp-stat-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  opacity: 0.75;
+  font-size: 13.5px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+  font-weight: 500;
   margin-top: 4px;
 }
 
@@ -2631,12 +2656,12 @@ html.dark .kp-chaat-card {
   left: 12px;
   background: rgba(20, 16, 14, 0.85);
   color: #f59e0b;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 4px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 9px;
   border-radius: 4px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .kp-jain-pill {
@@ -3002,12 +3027,12 @@ html.dark .kp-menu-item-card {
 }
 
 .kp-pill {
-  font-size: 10.5px;
-  font-weight: 700;
+  font-size: 11.5px;
+  font-weight: 600;
   padding: 3px 8px;
   border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
 .kp-pill.gold {
@@ -3041,9 +3066,9 @@ html.dark .kp-item-order-strip {
 }
 
 .kp-order-label {
-  font-size: 10.5px;
-  opacity: 0.6;
-  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0.75;
+  text-transform: none;
 }
 
 .kp-dish-order-btn {
@@ -3150,11 +3175,11 @@ html.dark .kp-host-card {
 }
 
 .kp-host-role {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--orange);
-  text-transform: uppercase;
+  text-transform: none;
   margin-bottom: 6px;
 }
 
@@ -4492,7 +4517,7 @@ html.dark .kp-hl-mini-btn.book {
   color: inherit;
   letter-spacing: inherit;
   cursor: pointer;
-  text-transform: uppercase;
+  text-transform: none;
   padding: 0;
   transition: color 0.25s ease;
 }

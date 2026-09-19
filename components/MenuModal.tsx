@@ -520,7 +520,7 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
         {/* Sticky Modal Header */}
         <div className="kp-menu-modal-top">
           <div className="kp-modal-brand-info">
-            <span className="kp-modal-estd">KAILASH PARBAT • ESTD 1952</span>
+            <span className="kp-modal-estd">Kailash Parbat • Estd 1952</span>
             <h2 className="kp-menu-modal-heading">The Royal Culinary Menu</h2>
           </div>
 

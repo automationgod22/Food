@@ -19,7 +19,7 @@ export default function Footer({ onOpenReservation, onOpenMenu }: FooterProps) {
             <div className="fl">
               <div className="fl-kp-wordmark">
                 <span className="kp-foot-title">Kailash Parbat</span>
-                <span className="kp-foot-sub">TASTE OF TRADITION • ESTD 1952</span>
+                <span className="kp-foot-sub kp-script-accent">Taste of Tradition • Estd 1952</span>
               </div>
             </div>
 
@@ -40,7 +40,7 @@ export default function Footer({ onOpenReservation, onOpenMenu }: FooterProps) {
             <div className="fl">
               <div className="kp-foot-veg-badge">
                 <span className="veg-icon">🌱</span>
-                <span className="veg-txt">100% PURE VEG</span>
+                <span className="veg-txt">100% Pure Veg</span>
               </div>
             </div>
           </div>

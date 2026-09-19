@@ -117,8 +117,8 @@ export default function Testimonials() {
         {/* Section Heading */}
         <div className="kp-center-header">
           <div className="kp-section-tag">
-            <span className="kp-tag-line">VOICES OF KOCHI</span>
-            <span className="kp-tag-pill">REAL EXPERIENCES</span>
+            <span className="kp-tag-line">Voices of Kochi</span>
+            <span className="kp-tag-pill">Real Experiences</span>
           </div>
           <h2 className="kp-section-title">
             Loved by Diners Across <span className="kp-gold-text">Kerala & Beyond</span>

@@ -69,8 +69,8 @@ export default function MenuSection({ onOpenMenu }: MenuSectionProps) {
         {/* Section Header */}
         <div className="kp-center-header">
           <div className="kp-section-tag">
-            <span className="kp-tag-line">THE CULINARY REPERTOIRE</span>
-            <span className="kp-tag-pill">140+ DISHES • 100% PURE VEG</span>
+            <span className="kp-tag-line">The Culinary Repertoire</span>
+            <span className="kp-tag-pill">140+ Dishes • 100% Pure Veg</span>
           </div>
           <h2 className="kp-section-title">
             Explore the World of <span className="kp-gold-text">Kailash Parbat Flavors</span>
@@ -122,7 +122,7 @@ export default function MenuSection({ onOpenMenu }: MenuSectionProps) {
         {/* Big Organized Menu Trigger Banner */}
         <div className="kp-menu-cta-box">
           <div className="kp-cta-box-left">
-            <span className="kp-box-pill">CLICK TO EXPAND</span>
+            <span className="kp-box-pill">Click to Explore</span>
             <h3>Ready to Discover All 140+ Recipes?</h3>
             <p>
               Open our interactive digital menu with category filtering, instant search, Jain options,

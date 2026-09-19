@@ -10,8 +10,8 @@ export default function HeritageSection() {
           {/* Left Column: Story & Milestones */}
           <div className="kp-heritage-content">
             <div className="kp-section-tag">
-              <span className="kp-tag-line">SINCE 1952</span>
-              <span className="kp-tag-pill">THE LEGENDARY ODYSSEY</span>
+              <span className="kp-tag-line">Since 1952</span>
+              <span className="kp-tag-pill">The Legendary Odyssey</span>
             </div>
 
             <h2 className="kp-section-title">

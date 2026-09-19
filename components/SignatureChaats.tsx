@@ -125,8 +125,8 @@ export default function SignatureChaats() {
         {/* Section Header */}
         <div className="kp-center-header">
           <div className="kp-section-tag">
-            <span className="kp-tag-line">THE WORLD-FAMOUS CHAAT BAR</span>
-            <span className="kp-tag-pill">CRISPY • TANGY • ROYAL</span>
+            <span className="kp-tag-line">The World-Famous Chaat Bar</span>
+            <span className="kp-tag-pill">Crispy • Tangy • Royal</span>
           </div>
           <h2 className="kp-section-title">
             The Legendary Chaat of <span className="kp-gold-text">Kailash Parbat</span>
