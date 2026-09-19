@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Header() {
   const [isStuck, setIsStuck] = useState(false);
@@ -159,6 +160,9 @@ export default function Header() {
                 </svg>
               </a>
             </li>
+            <li>
+              <ThemeToggle />
+            </li>
           </ul>
 
           <a
@@ -231,13 +235,16 @@ export default function Header() {
           </li>
         </ul>
 
-        <a
-          href="#locations"
-          className="btn-x"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Reserve a Table
-        </a>
+        <div className="ovl-actions" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <a
+            href="#locations"
+            className="btn-x"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Reserve a Table
+          </a>
+          <ThemeToggle />
+        </div>
       </div>
     </>
   );
