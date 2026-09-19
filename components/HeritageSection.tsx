@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 
 export default function HeritageSection() {
   return (
@@ -84,12 +83,12 @@ export default function HeritageSection() {
             </div>
           </div>
 
-          {/* Right Column: Imagery Collage from real Assets */}
+          {/* Right Column: Imagery Collage from verified Assets */}
           <div className="kp-heritage-visual">
             <div className="kp-collage-wrap">
               <div className="kp-collage-main">
                 <img
-                  src="/kp/photos/14.jpg"
+                  src="/kp/dishes/paneer_tikka_brass.jpg"
                   alt="Kailash Parbat Signature Paneer Tikka on Brass Platter"
                   className="kp-collage-img-1"
                 />
@@ -101,8 +100,8 @@ export default function HeritageSection() {
 
               <div className="kp-collage-sub">
                 <img
-                  src="/kp/photos/8.jpg"
-                  alt="Authentic Dahi Puri Chaat"
+                  src="/kp/dishes/chaat_platter.jpg"
+                  alt="Authentic Grand KP Chaat Platter"
                   className="kp-collage-img-2"
                 />
                 <div className="kp-floating-stamp">
@@ -113,8 +112,8 @@ export default function HeritageSection() {
 
               <div className="kp-collage-mini">
                 <img
-                  src="/kp/photos/17.jpg"
-                  alt="Kailash Parbat Dining Hall Ambience"
+                  src="/kp/dishes/interior_mural.jpg"
+                  alt="Kailash Parbat The Gateway Bombay Mural"
                   className="kp-collage-img-3"
                 />
               </div>

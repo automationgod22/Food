@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
+
+interface HeroSliderProps {
+  onOpenMenu?: () => void;
+}
 
 interface Slide {
   id: number;
@@ -10,12 +13,12 @@ interface Slide {
   highlight: string;
   subtitle: string;
   badge: string;
-  priceTag?: string;
+  priceTag: string;
   image: string;
   primaryCtaText: string;
   primaryCtaLink: string;
   secondaryCtaText: string;
-  secondaryCtaLink: string;
+  isMenuAction?: boolean;
 }
 
 const slides: Slide[] = [
@@ -27,12 +30,12 @@ const slides: Slide[] = [
     subtitle:
       'Slow-simmered spiced vegetable medley finished with pure dollops of butter curls, accompanied by warm, fluffy buttered pav rolls. A recipe perfected over 70 years.',
     badge: 'Signature House Special',
-    priceTag: 'Starting at ₹329',
-    image: '/kp/photos/5.png',
+    priceTag: '₹329.00',
+    image: '/kp/dishes/pav_bhaji.jpg',
     primaryCtaText: 'Order on Zomato',
     primaryCtaLink: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
     secondaryCtaText: 'Explore Menu',
-    secondaryCtaLink: '#menu',
+    isMenuAction: true,
   },
   {
     id: 2,
@@ -43,42 +46,43 @@ const slides: Slide[] = [
       'Tender malai cottage cheese marinated in crushed whole spices and Greek-style curd, roasted in clay tandoors to smoky perfection with tangy mint-coriander chutney.',
     badge: 'Chef Recommended',
     priceTag: '₹439.00',
-    image: '/kp/photos/14.jpg',
+    image: '/kp/dishes/paneer_tikka_brass.jpg',
     primaryCtaText: 'Order on Swiggy',
     primaryCtaLink:
       'https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder',
-    secondaryCtaText: 'View Starters',
-    secondaryCtaLink: '#menu',
+    secondaryCtaText: 'View Tandoor Starters',
+    isMenuAction: true,
   },
   {
     id: 3,
     tagline: 'LEGENDARY SINDHI & BOMBAY CHAAT',
-    title: 'Crispy Regal',
-    highlight: 'Dahi Puri & Chaat',
+    title: 'Grand Royal',
+    highlight: 'KP Chaat Platter',
     subtitle:
-      'Golden puffed puris bursting with spiced potato-chickpea mash, chilled churned yogurt, sweet tamarind glaze, spicy mint pani, and crisp fine sev.',
+      'An exciting platter of silky Dahi Wada, tangy Bhel Puri, 3 pcs Sev Puri & 3 pcs Crispy Corn Baskets topped with sweet and sour chutneys and fine sev.',
     badge: '1952 Classic',
-    priceTag: '₹229.00',
-    image: '/kp/photos/8.jpg',
-    primaryCtaText: 'Discover Chaat Bar',
-    primaryCtaLink: '#chaats',
-    secondaryCtaText: 'Order Online',
-    secondaryCtaLink: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
+    priceTag: '₹459.00',
+    image: '/kp/dishes/chaat_platter.jpg',
+    primaryCtaText: 'Order on Zomato',
+    primaryCtaLink: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
+    secondaryCtaText: 'Discover Chaat Bar',
+    isMenuAction: false,
   },
   {
     id: 4,
     tagline: 'THE ORIGINAL MUMBAI SOUL FOOD',
     title: 'Authentic Street',
-    highlight: 'Bombay Vada Pav',
+    highlight: 'Bombay Wada Pav (2 Pcs)',
     subtitle:
       'Golden spiced batata fritters hugged by pillowy pav buns, coated with fiery roasted garlic chutney and served with blistered salted green chilies.',
     badge: 'Mumbai Legend',
     priceTag: '2 Pcs • ₹199',
-    image: '/kp/photos/7.jpg',
-    primaryCtaText: 'Order on Zomato',
-    primaryCtaLink: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
-    secondaryCtaText: 'Full Menu',
-    secondaryCtaLink: '#menu',
+    image: '/kp/dishes/vada_pav_brass.jpg',
+    primaryCtaText: 'Order on Swiggy',
+    primaryCtaLink:
+      'https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder',
+    secondaryCtaText: 'View Street Specials',
+    isMenuAction: true,
   },
   {
     id: 5,
@@ -89,16 +93,15 @@ const slides: Slide[] = [
       'Grilled cottage cheese cubes simmered in our signature simmered tomato-cashew satin gravy, enriched with aromatic dried fenugreek leaves and saffron butter.',
     badge: 'All-Time Favorite',
     priceTag: '₹449.00',
-    image: '/kp/photos/2.jpg',
-    primaryCtaText: 'Order on Swiggy',
-    primaryCtaLink:
-      'https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder',
-    secondaryCtaText: 'Book Table',
-    secondaryCtaLink: '#hospitality',
+    image: '/kp/dishes/paneer_lababdar_curry.jpg',
+    primaryCtaText: 'Order on Zomato',
+    primaryCtaLink: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
+    secondaryCtaText: 'Full Menu',
+    isMenuAction: true,
   },
 ];
 
-export default function HeroSlider() {
+export default function HeroSlider({ onOpenMenu }: HeroSliderProps) {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -189,7 +192,7 @@ export default function HeroSlider() {
                     className="kp-mobile-hero-img"
                   />
                   <div className="kp-mobile-img-badge">
-                    <span>{slide.priceTag || '100% Pure Veg'}</span>
+                    <span>{slide.priceTag}</span>
                   </div>
                 </div>
 
@@ -197,7 +200,7 @@ export default function HeroSlider() {
 
                 {slide.priceTag && (
                   <div className="kp-hero-pricing">
-                    <span className="kp-price-label">Heritage Recipe:</span>
+                    <span className="kp-price-label">Authentic Recipe:</span>
                     <span className="kp-price-value">{slide.priceTag}</span>
                     <span className="kp-price-note">100% Pure Veg</span>
                   </div>
@@ -206,7 +209,7 @@ export default function HeroSlider() {
                 <div className="kp-hero-ctas">
                   <a
                     href={slide.primaryCtaLink}
-                    target={slide.primaryCtaLink.startsWith('http') ? '_blank' : '_self'}
+                    target="_blank"
                     rel="noreferrer"
                     className="kp-btn-gold"
                   >
@@ -219,9 +222,16 @@ export default function HeroSlider() {
                       />
                     </svg>
                   </a>
-                  <Link href={slide.secondaryCtaLink} className="kp-btn-outline">
-                    {slide.secondaryCtaText}
-                  </Link>
+
+                  {slide.isMenuAction && onOpenMenu ? (
+                    <button onClick={onOpenMenu} className="kp-btn-outline">
+                      {slide.secondaryCtaText}
+                    </button>
+                  ) : (
+                    <a href="#chaats" className="kp-btn-outline">
+                      {slide.secondaryCtaText}
+                    </a>
+                  )}
                 </div>
 
                 {/* Trust Badges */}
@@ -238,7 +248,7 @@ export default function HeroSlider() {
                     <span className="kp-trust-icon">🌿</span>
                     <div>
                       <strong>100% Pure Vegetarian</strong>
-                      <small>Dedicated Jain Kitchen Preparation</small>
+                      <small>Dedicated Jain Kitchen Section</small>
                     </div>
                   </div>
                 </div>
@@ -258,7 +268,7 @@ export default function HeroSlider() {
                     <span className="kp-overlay-sparkle">✨</span>
                     <div>
                       <strong>Panampilly Nagar, Kochi</strong>
-                      <span>Freshly prepared on order</span>
+                      <span>Freshly made to order</span>
                     </div>
                   </div>
                 </div>

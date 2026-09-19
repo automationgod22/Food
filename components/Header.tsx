@@ -5,7 +5,12 @@ import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
 import ReservationModal from '@/components/ReservationModal';
 
-export default function Header() {
+interface HeaderProps {
+  onOpenMenu?: () => void;
+  onOpenReservation?: () => void;
+}
+
+export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
   const [isStuck, setIsStuck] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isResOpen, setIsResOpen] = useState(false);
@@ -20,6 +25,14 @@ export default function Header() {
   const BASE = 7;
   const DEEP = 31;
   const HW = 165;
+
+  const triggerReservation = () => {
+    if (onOpenReservation) {
+      onOpenReservation();
+    } else {
+      setIsResOpen(true);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -131,9 +144,19 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link href="#menu" onMouseEnter={handleMouseEnterItem}>
-                EXPLORE MENU
-              </Link>
+              {onOpenMenu ? (
+                <button
+                  onClick={onOpenMenu}
+                  className="kp-nav-menu-btn"
+                  onMouseEnter={handleMouseEnterItem}
+                >
+                  EXPLORE MENU
+                </button>
+              ) : (
+                <Link href="#menu" onMouseEnter={handleMouseEnterItem}>
+                  EXPLORE MENU
+                </Link>
+              )}
             </li>
           </ul>
 
@@ -181,7 +204,7 @@ export default function Header() {
             </li>
             <li className="kp-nav-cta-item">
               <button
-                onClick={() => setIsResOpen(true)}
+                onClick={triggerReservation}
                 className="kp-header-reserve-btn"
                 onMouseEnter={handleMouseEnterItem}
               >
@@ -228,8 +251,17 @@ export default function Header() {
 
           {/* Mobile direct order button */}
           <div className="m-cta-group">
+            {onOpenMenu && (
+              <button
+                onClick={onOpenMenu}
+                className="m-menu-quick-btn"
+                aria-label="Open Menu"
+              >
+                Menu
+              </button>
+            )}
             <button
-              onClick={() => setIsResOpen(true)}
+              onClick={triggerReservation}
               className="m-book-btn"
               aria-label="Book Table"
             >
@@ -268,9 +300,21 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="#menu" onClick={() => setIsMenuOpen(false)}>
-              Full Menu & Combos
-            </Link>
+            {onOpenMenu ? (
+              <button
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onOpenMenu();
+                }}
+                className="ovl-menu-link-btn"
+              >
+                Full Menu & Combos (140+ Dishes)
+              </button>
+            ) : (
+              <Link href="#menu" onClick={() => setIsMenuOpen(false)}>
+                Full Menu & Combos
+              </Link>
+            )}
           </li>
           <li>
             <Link href="#hospitality" onClick={() => setIsMenuOpen(false)}>
@@ -315,7 +359,7 @@ export default function Header() {
           <button
             onClick={() => {
               setIsMenuOpen(false);
-              setIsResOpen(true);
+              triggerReservation();
             }}
             className="btn-x"
           >
@@ -325,11 +369,13 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Interactive Reservation Modal */}
-      <ReservationModal
-        isOpen={isResOpen}
-        onClose={() => setIsResOpen(false)}
-      />
+      {/* Reservation Modal fallback */}
+      {!onOpenReservation && (
+        <ReservationModal
+          isOpen={isResOpen}
+          onClose={() => setIsResOpen(false)}
+        />
+      )}
     </>
   );
 }

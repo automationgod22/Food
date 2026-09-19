@@ -4,9 +4,13 @@ import React from 'react';
 
 interface MobileStickyBarProps {
   onOpenReservation: () => void;
+  onOpenMenu?: () => void;
 }
 
-export default function MobileStickyBar({ onOpenReservation }: MobileStickyBarProps) {
+export default function MobileStickyBar({
+  onOpenReservation,
+  onOpenMenu,
+}: MobileStickyBarProps) {
   const whatsappUrl = `https://api.whatsapp.com/send?phone=919847000000&text=${encodeURIComponent(
     'Hello Kailash Parbat Panampilly Nagar! I would like to book a table or order food.'
   )}`;
@@ -14,6 +18,26 @@ export default function MobileStickyBar({ onOpenReservation }: MobileStickyBarPr
   return (
     <div className="kp-mobile-bar" role="navigation" aria-label="Quick Mobile Actions">
       <div className="kp-mobile-bar-inner">
+        {onOpenMenu && (
+          <button
+            onClick={onOpenMenu}
+            className="kp-mbar-btn menu"
+            aria-label="Open Full Digital Menu"
+          >
+            <span className="kp-mbar-icon">📖</span>
+            <span className="kp-mbar-text">Menu</span>
+          </button>
+        )}
+
+        <button
+          onClick={onOpenReservation}
+          className="kp-mbar-btn reserve"
+          aria-label="Book Table"
+        >
+          <span className="kp-mbar-icon">📅</span>
+          <span className="kp-mbar-text">Book</span>
+        </button>
+
         <a
           href="https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order"
           target="_blank"
@@ -35,15 +59,6 @@ export default function MobileStickyBar({ onOpenReservation }: MobileStickyBarPr
           <span className="kp-mbar-dot">●</span>
           <span className="kp-mbar-text">Swiggy</span>
         </a>
-
-        <button
-          onClick={onOpenReservation}
-          className="kp-mbar-btn reserve"
-          aria-label="Book Table"
-        >
-          <span className="kp-mbar-icon">📅</span>
-          <span className="kp-mbar-text">Book Table</span>
-        </button>
 
         <a
           href={whatsappUrl}

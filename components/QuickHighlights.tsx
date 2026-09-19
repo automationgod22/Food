@@ -4,10 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 
 interface QuickHighlightsProps {
+  onOpenMenu?: () => void;
   onOpenReservation?: () => void;
 }
 
-export default function QuickHighlights({ onOpenReservation }: QuickHighlightsProps) {
+export default function QuickHighlights({ onOpenMenu, onOpenReservation }: QuickHighlightsProps) {
   return (
     <section className="kp-highlights-bar" aria-label="Restaurant Highlights">
       <div className="kp-container">
@@ -25,16 +26,22 @@ export default function QuickHighlights({ onOpenReservation }: QuickHighlightsPr
           </Link>
 
           {/* Card 2: Pav Bhaji & Street Food */}
-          <Link href="#menu" className="kp-highlight-card">
+          <div
+            className="kp-highlight-card"
+            onClick={onOpenMenu}
+            style={{ cursor: onOpenMenu ? 'pointer' : 'default' }}
+            role="button"
+            tabIndex={0}
+          >
             <div className="kp-hl-icon-wrap butter">
               <span>🧈</span>
             </div>
             <div className="kp-hl-content">
               <h4>Bombay Butter Pav Bhaji</h4>
               <p>Slow-simmered spiced bhaji topped with golden butter curls and warm pav rolls.</p>
-              <span className="kp-hl-link">View Menu →</span>
+              <span className="kp-hl-link">Open Menu & Prices →</span>
             </div>
-          </Link>
+          </div>
 
           {/* Card 3: 100% Pure Veg & Jain */}
           <div className="kp-highlight-card">
@@ -77,6 +84,7 @@ export default function QuickHighlights({ onOpenReservation }: QuickHighlightsPr
                   <button
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       onOpenReservation();
                     }}
                     className="kp-hl-mini-btn book"

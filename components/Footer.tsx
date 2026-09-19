@@ -5,9 +5,10 @@ import Link from 'next/link';
 
 interface FooterProps {
   onOpenReservation?: () => void;
+  onOpenMenu?: () => void;
 }
 
-export default function Footer({ onOpenReservation }: FooterProps) {
+export default function Footer({ onOpenReservation, onOpenMenu }: FooterProps) {
   return (
     <footer className="foot" id="footer" aria-label="Website Footer">
       <div className="foot-main">
@@ -76,7 +77,13 @@ export default function Footer({ onOpenReservation }: FooterProps) {
             <h6>Explore</h6>
             <Link href="#heritage">Our Heritage</Link>
             <Link href="#chaats">Legendary Chaats</Link>
-            <Link href="#menu">Digital Menu</Link>
+            {onOpenMenu ? (
+              <button onClick={onOpenMenu} className="kp-foot-res-btn">
+                Digital Menu (140+ Items)
+              </button>
+            ) : (
+              <Link href="#menu">Digital Menu</Link>
+            )}
             <Link href="#hospitality">Ambience & Host</Link>
             <Link href="#reviews">Verified Reviews</Link>
             <Link href="#visit">Location & Map</Link>

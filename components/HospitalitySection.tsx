@@ -31,7 +31,7 @@ export default function HospitalitySection({ onOpenReservation }: HospitalitySec
           <div className="kp-host-card">
             <div className="kp-host-media">
               <img
-                src="/kp/owner/1.jpg"
+                src="/kp/dishes/udhav_nayak_host.jpg"
                 alt="Udhav Nayak - Restaurant Host & Manager at Kailash Parbat Panampilly Nagar"
                 className="kp-host-img"
               />
@@ -65,12 +65,12 @@ export default function HospitalitySection({ onOpenReservation }: HospitalitySec
           <div className="kp-ambience-card">
             <div className="kp-ambience-img-wrap">
               <img
-                src="/kp/photos/10.jpg"
-                alt="Kailash Parbat Kochi Interior Dining Room"
+                src="/kp/dishes/interior_mural.jpg"
+                alt="The Gateway Bombay Wall Mural and Dining Hall at Kailash Parbat Kochi"
                 className="kp-ambience-img"
               />
               <div className="kp-ambience-overlay">
-                <span className="kp-ambience-pill">Modern Elegance & Heritage Charm</span>
+                <span className="kp-ambience-pill">The Gateway Bombay Mural & Luxe Interiors</span>
               </div>
             </div>
 

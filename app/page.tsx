@@ -14,27 +14,42 @@ import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import MobileStickyBar from '@/components/MobileStickyBar';
 import ReservationModal from '@/components/ReservationModal';
+import MenuModal from '@/components/MenuModal';
 
 export default function HomePage() {
   const [isResOpen, setIsResOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <>
-      <Header />
+      <Header
+        onOpenMenu={() => setIsMenuOpen(true)}
+        onOpenReservation={() => setIsResOpen(true)}
+      />
       <main id="top">
-        <HeroSlider />
-        <QuickHighlights onOpenReservation={() => setIsResOpen(true)} />
+        <HeroSlider onOpenMenu={() => setIsMenuOpen(true)} />
+        <QuickHighlights
+          onOpenMenu={() => setIsMenuOpen(true)}
+          onOpenReservation={() => setIsResOpen(true)}
+        />
         <HeritageSection />
         <SignatureChaats />
-        <MenuSection />
+        <MenuSection onOpenMenu={() => setIsMenuOpen(true)} />
         <HospitalitySection onOpenReservation={() => setIsResOpen(true)} />
         <Testimonials />
         <VisitSection onOpenReservation={() => setIsResOpen(true)} />
       </main>
-      <Footer onOpenReservation={() => setIsResOpen(true)} />
+      <Footer
+        onOpenMenu={() => setIsMenuOpen(true)}
+        onOpenReservation={() => setIsResOpen(true)}
+      />
       <FloatingWhatsApp />
-      <MobileStickyBar onOpenReservation={() => setIsResOpen(true)} />
+      <MobileStickyBar
+        onOpenReservation={() => setIsResOpen(true)}
+        onOpenMenu={() => setIsMenuOpen(true)}
+      />
       <ReservationModal isOpen={isResOpen} onClose={() => setIsResOpen(false)} />
+      <MenuModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>
   );
 }
