@@ -617,13 +617,13 @@ export default function MenuModal({ isOpen, onClose }: MenuModalProps) {
               {/* Dish Cards Grid */}
               <div className="kp-menu-cards-grid">
                 {filteredItems.map((item) => (
-                  <div key={item.id} className="kp-menu-item-card">
+                  <div key={item.id} className="kp-menu-item-card kp-scroll-zoom-card in-view">
                     {item.image && (
-                      <div className="kp-menu-thumb-wrap">
+                      <div className="kp-menu-thumb-wrap kp-scroll-zoom-media">
                         <img
                           src={item.image}
                           alt={item.name}
-                          className="kp-menu-thumb"
+                          className="kp-menu-thumb kp-scroll-zoom-img"
                           loading="lazy"
                         />
                       </div>

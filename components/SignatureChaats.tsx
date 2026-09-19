@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface ChaatItem {
   id: string;
@@ -78,9 +78,9 @@ const chaatItems: ChaatItem[] = [
   {
     id: 'hariyali-tikka',
     name: 'Hariyali Paneer Tikka',
-    price: '₹459.00',
-    tag: 'Green Marinade Craft',
-    desc: 'Cottage cheese skewers coated in fresh garden mint, coriander leaves, green chilies, and aromatic roasted cumin, flame-charred to perfection.',
+    price: '₹449.00',
+    tag: 'Herb Infused Delight',
+    desc: 'Cottage cheese marinated in aromatic freshly pounded garden mint, coriander, ginger, and green chilies, char-grilled to juicy perfection.',
     image: '/kp/dishes/hariyali_paneer_tikka.jpg',
     isJainAvailable: true,
     orderZomato: 'https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order',
@@ -91,6 +91,33 @@ const chaatItems: ChaatItem[] = [
 
 export default function SignatureChaats() {
   const [activeItem, setActiveItem] = useState(chaatItems[0]);
+  const [inViewIds, setInViewIds] = useState<string[]>([]);
+  const cardElementsRef = useRef<Map<string, HTMLDivElement>>(new Map());
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('data-id') || '';
+          if (entry.isIntersecting) {
+            setInViewIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+          } else {
+            setInViewIds((prev) => prev.filter((i) => i !== id));
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -30px 0px',
+      }
+    );
+
+    cardElementsRef.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="chaats" className="kp-chaats-section" aria-label="Legendary Chaats">
@@ -110,19 +137,26 @@ export default function SignatureChaats() {
           </p>
         </div>
 
-        {/* Chaat Grid */}
+        {/* Chaat Grid with Scroll-Zoom Effect */}
         <div className="kp-chaats-grid">
           {chaatItems.map((item) => (
             <div
               key={item.id}
-              className={`kp-chaat-card ${activeItem.id === item.id ? 'featured' : ''}`}
+              ref={(el) => {
+                if (el) cardElementsRef.current.set(item.id, el);
+                else cardElementsRef.current.delete(item.id);
+              }}
+              data-id={item.id}
+              className={`kp-chaat-card kp-scroll-zoom-card ${
+                inViewIds.includes(item.id) ? 'in-view' : ''
+              } ${activeItem.id === item.id ? 'featured' : ''}`}
               onMouseEnter={() => setActiveItem(item)}
             >
-              <div className="kp-chaat-img-wrap">
+              <div className="kp-chaat-img-wrap kp-scroll-zoom-media">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="kp-chaat-img"
+                  className="kp-chaat-img kp-scroll-zoom-img"
                   loading="lazy"
                 />
                 <span className="kp-chaat-badge">{item.tag}</span>

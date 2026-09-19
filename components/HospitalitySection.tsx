@@ -61,31 +61,36 @@ export default function HospitalitySection({ onOpenReservation }: HospitalitySec
             </div>
           </div>
 
-          {/* Ambience & Interiors Showcase */}
-          <div className="kp-ambience-card">
-            <div className="kp-ambience-img-wrap">
+          {/* Ambience & Interiors Showcase: AI Regal Dining Experience */}
+          <div className="kp-ambience-card kp-scroll-zoom-card in-view">
+            <div className="kp-ambience-img-wrap kp-scroll-zoom-media">
               <img
-                src="/kp/dishes/interior_mural.jpg"
-                alt="The Gateway Bombay Wall Mural and Dining Hall at Kailash Parbat Kochi"
-                className="kp-ambience-img"
+                src="/kp/dishes/regal_dining_hall.jpg"
+                alt="Regal Fine Dining Experience at Kailash Parbat Panampilly Nagar Kochi"
+                className="kp-ambience-img kp-scroll-zoom-img"
+                loading="lazy"
               />
               <div className="kp-ambience-overlay">
-                <span className="kp-ambience-pill">The Gateway Bombay Mural & Luxe Interiors</span>
+                <span className="kp-ambience-pill">✨ Imperial Dining Halls & Crystal Chandeliers</span>
               </div>
             </div>
 
             <div className="kp-ambience-body">
-              <h3>Regal Dining Experience</h3>
-              <p>
+              <div className="kp-regal-badge-row">
+                <span className="kp-regal-badge">ROYAL COMFORT</span>
+                <span className="kp-regal-stars">★★★★★ 4.6/5 Diner Rating</span>
+              </div>
+              <h3 className="kp-ambience-title">The Regal Dining Experience</h3>
+              <p className="kp-ambience-text">
                 &ldquo;Been to a number of Kailash Parbat locations across the country, but this Panampilly Nagar
                 restaurant look and feel is completely extraordinary. The interior is superbly done with warm
-                lighting, acoustic balance, and spotless hygiene.&rdquo;
+                golden chandeliers, plush velvet banquettes, acoustic balance, and spotless five-star hygiene.&rdquo;
               </p>
               <span className="kp-guest-author">— Abhishek Katriar (Local Guide • 221 Reviews)</span>
 
               {onOpenReservation && (
                 <button onClick={onOpenReservation} className="kp-btn-gold mt-4">
-                  Book Your Table Now
+                  <span>📅</span> Reserve Your Regal Table
                 </button>
               )}
             </div>

@@ -1,12 +1,37 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface MenuSectionProps {
   onOpenMenu: () => void;
 }
 
 export default function MenuSection({ onOpenMenu }: MenuSectionProps) {
+  const [inViewCards, setInViewCards] = useState<number[]>([]);
+  const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = Number(entry.target.getAttribute('data-index'));
+          if (entry.isIntersecting) {
+            setInViewCards((prev) => (prev.includes(id) ? prev : [...prev, id]));
+          } else {
+            setInViewCards((prev) => prev.filter((i) => i !== id));
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -30px 0px' }
+    );
+
+    cardRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const highlights = [
     {
       category: 'Legendary Chaats',
@@ -56,12 +81,30 @@ export default function MenuSection({ onOpenMenu }: MenuSectionProps) {
           </p>
         </div>
 
-        {/* 4 Culinary Highlight Pillars */}
+        {/* 4 Culinary Highlight Pillars with Scroll-Zoom Effect */}
         <div className="kp-menu-preview-grid">
           {highlights.map((h, i) => (
-            <div key={i} className="kp-preview-card" onClick={onOpenMenu} role="button" tabIndex={0}>
-              <div className="kp-preview-media">
-                <img src={h.image} alt={h.category} className="kp-preview-img" loading="lazy" />
+            <div
+              key={i}
+              ref={(el) => {
+                if (el) cardRefs.current.set(i, el);
+                else cardRefs.current.delete(i);
+              }}
+              data-index={i}
+              className={`kp-preview-card kp-scroll-zoom-card ${
+                inViewCards.includes(i) ? 'in-view' : ''
+              }`}
+              onClick={onOpenMenu}
+              role="button"
+              tabIndex={0}
+            >
+              <div className="kp-preview-media kp-scroll-zoom-media">
+                <img
+                  src={h.image}
+                  alt={h.category}
+                  className="kp-preview-img kp-scroll-zoom-img"
+                  loading="lazy"
+                />
                 <span className="kp-preview-badge">{h.tag}</span>
                 <span className="kp-preview-count">{h.count}</span>
               </div>
