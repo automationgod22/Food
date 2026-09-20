@@ -87,37 +87,80 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
 
   return (
     <>
-      {/* Top Heritage Info Bar */}
+      <div className={`kp-master-header ${isStuck ? 'is-stuck' : ''}`}>
+      {/* Top Address & Information Ribbon */}
       <div className="kp-top-bar">
         <div className="kp-top-bar-inner">
+          {/* Left Segment: Heritage, Address & Operating Hours */}
           <div className="kp-top-left">
             <span className="kp-top-badge">Estd 1952</span>
-            <span className="kp-top-text">
-              📍 Panampilly Nagar, Kochi • Open Daily 11:30 AM – 11:00 PM
-            </span>
+
+            <a
+              href="https://maps.google.com/?q=Kailash+Parbat+Panampilly+Nagar+Kochi"
+              target="_blank"
+              rel="noreferrer"
+              className="kp-top-address-pill"
+              title="View on Google Maps"
+            >
+              <span className="kp-top-pin">📍</span>
+              <span className="kp-top-addr-text">Panampilly Nagar, Kochi</span>
+              <span className="kp-top-map-tag">Map ↗</span>
+            </a>
+
+            <div className="kp-top-time-pill" title="Current Restaurant Hours">
+              <span className="kp-live-pulse" aria-hidden="true"></span>
+              <span className="kp-top-time-text">Open Daily 11:30 AM – 11:00 PM</span>
+            </div>
           </div>
+
+          {/* Center Segment: Pure Vegetarian & Jain Kitchen */}
           <div className="kp-top-center">
-            <span className="kp-pure-veg-pill">🌱 100% Pure Vegetarian & Jain Specialties</span>
+            <div className="kp-pure-veg-pill">
+              <span className="kp-veg-symbol">🌱</span>
+              <strong className="kp-veg-title">100% Pure Vegetarian</strong>
+              <span className="kp-veg-divider">•</span>
+              <span className="kp-veg-jain">Jain Specialties</span>
+            </div>
           </div>
+
+          {/* Right Segment: Google Rating & Quick Order / Call */}
           <div className="kp-top-right">
-            <span className="kp-google-badge">★ 4.6 (373+ Google Reviews)</span>
-            <div className="kp-top-order-links">
+            <a
+              href="#reviews"
+              className="kp-google-badge"
+              title="Google Reviews Rating"
+            >
+              <span className="kp-google-star">★</span>
+              <span className="kp-google-score">4.6</span>
+              <span className="kp-google-count">(373+ Reviews)</span>
+            </a>
+
+            <div className="kp-top-order-pills">
+              <span className="kp-order-label-mini">Quick Order:</span>
               <a
                 href="https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order"
                 target="_blank"
                 rel="noreferrer"
-                className="kp-top-link zomato"
+                className="kp-top-pill-btn zomato"
+                title="Order on Zomato"
               >
                 Zomato
               </a>
-              <span className="kp-top-sep">•</span>
               <a
                 href="https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder"
                 target="_blank"
                 rel="noreferrer"
-                className="kp-top-link swiggy"
+                className="kp-top-pill-btn swiggy"
+                title="Order on Swiggy"
               >
                 Swiggy
+              </a>
+              <a
+                href="tel:04844024444"
+                className="kp-top-call-pill"
+                title="Call 0484 402 4444"
+              >
+                📞 0484 402 4444
               </a>
             </div>
           </div>
@@ -276,6 +319,7 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
           </svg>
         </div>
       </header>
+    </div>
 
       {/* Mobile Drawer Overlay */}
       <div className={`ovl ${isMenuOpen ? 'open' : ''}`} id="ovl">
