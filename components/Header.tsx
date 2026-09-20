@@ -322,94 +322,155 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
     </div>
 
       {/* Mobile Drawer Overlay */}
-      <div className={`ovl ${isMenuOpen ? 'open' : ''}`} id="ovl">
-        <div className="ovl-brand-bar">
-          <span className="ovl-brand-title">Kailash Parbat</span>
-          <span className="ovl-brand-sub">Panampilly Nagar, Kochi</span>
-        </div>
-        <ul>
-          <li>
-            <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="#heritage" onClick={() => setIsMenuOpen(false)}>
-              Our Heritage (Since 1952)
-            </Link>
-          </li>
-          <li>
-            <Link href="#chaats" onClick={() => setIsMenuOpen(false)}>
-              Legendary Chaat Bar
-            </Link>
-          </li>
-          <li>
-            {onOpenMenu ? (
-              <button
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  onOpenMenu();
-                }}
-                className="ovl-menu-link-btn"
-              >
-                Full Menu & Combos (140+ Dishes)
-              </button>
-            ) : (
-              <Link href="#menu" onClick={() => setIsMenuOpen(false)}>
-                Full Menu & Combos
-              </Link>
-            )}
-          </li>
-          <li>
-            <Link href="#hospitality" onClick={() => setIsMenuOpen(false)}>
-              Ambience & Hospitality
-            </Link>
-          </li>
-          <li>
-            <Link href="#reviews" onClick={() => setIsMenuOpen(false)}>
-              Guest Reviews (4.6★)
-            </Link>
-          </li>
-          <li>
-            <Link href="#visit" onClick={() => setIsMenuOpen(false)}>
-              Location & Timings
-            </Link>
-          </li>
-        </ul>
-
-        <div className="ovl-delivery-links">
-          <p className="ovl-del-title">Order Direct to Your Doorstep:</p>
-          <div className="ovl-del-btns">
-            <a
-              href="https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order"
-              target="_blank"
-              rel="noreferrer"
-              className="ovl-app-btn zomato"
-            >
-              Order on Zomato
-            </a>
-            <a
-              href="https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder"
-              target="_blank"
-              rel="noreferrer"
-              className="ovl-app-btn swiggy"
-            >
-              Order on Swiggy
-            </a>
+      <div
+        className={`ovl ${isMenuOpen ? 'open' : ''}`}
+        id="ovl"
+        aria-hidden={!isMenuOpen}
+      >
+        <div className="ovl-header">
+          <div className="ovl-brand-bar">
+            <div className="ovl-crest">
+              <span className="ovl-crest-crown">⚜</span>
+              <span className="ovl-crest-yr">1952</span>
+            </div>
+            <span className="ovl-brand-title">Kailash Parbat</span>
+            <span className="ovl-brand-sub">Panampilly Nagar, Kochi</span>
           </div>
+          <button
+            className="ovl-close-btn"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
         </div>
 
-        <div className="ovl-actions">
-          <button
+        <div className="ovl-scroll-body">
+          {/* Featured Menu AI Visual Showcase Card */}
+          <div
+            className="ovl-menu-ai-card"
             onClick={() => {
               setIsMenuOpen(false);
-              triggerReservation();
+              if (onOpenMenu) onOpenMenu();
             }}
-            className="btn-x"
+            role="button"
+            tabIndex={0}
           >
-            Reserve a Table
-          </button>
-          <ThemeToggle />
+            <div className="ovl-menu-ai-img-wrap">
+              <img
+                src="/kp/menu_sidebar_feature.jpg"
+                alt="Kailash Parbat Royal Vegetarian Feast Menu"
+                className="ovl-menu-ai-img"
+              />
+              <div className="ovl-menu-ai-overlay"></div>
+              <span className="ovl-menu-ai-badge">✦ Chef&apos;s Royal Selection</span>
+              <div className="ovl-menu-ai-details">
+                <span className="ovl-menu-ai-kicker">Signature Chaat &amp; Delicacies</span>
+                <h3 className="ovl-menu-ai-title">Explore 140+ Dishes</h3>
+                <span className="ovl-menu-ai-cta">
+                  Open Digital Menu <span>→</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <ul className="ovl-nav-list">
+            <li>
+              <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                <span className="ovl-nav-icon">🏠</span>
+                <span>Home</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="#heritage" onClick={() => setIsMenuOpen(false)}>
+                <span className="ovl-nav-icon">🏛️</span>
+                <span>Our Heritage (Since 1952)</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="#chaats" onClick={() => setIsMenuOpen(false)}>
+                <span className="ovl-nav-icon">🍲</span>
+                <span>Legendary Chaat Bar</span>
+              </Link>
+            </li>
+            <li>
+              {onOpenMenu ? (
+                <button
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onOpenMenu();
+                  }}
+                  className="ovl-menu-link-btn"
+                >
+                  <span className="ovl-nav-icon">📜</span>
+                  <span>Full Menu &amp; Combos (140+ Dishes)</span>
+                </button>
+              ) : (
+                <Link href="#menu" onClick={() => setIsMenuOpen(false)}>
+                  <span className="ovl-nav-icon">📜</span>
+                  <span>Full Menu &amp; Combos</span>
+                </Link>
+              )}
+            </li>
+            <li>
+              <Link href="#hospitality" onClick={() => setIsMenuOpen(false)}>
+                <span className="ovl-nav-icon">✨</span>
+                <span>Ambience &amp; Hospitality</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="#reviews" onClick={() => setIsMenuOpen(false)}>
+                <span className="ovl-nav-icon">⭐</span>
+                <span>Guest Reviews (4.6★)</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="#visit" onClick={() => setIsMenuOpen(false)}>
+                <span className="ovl-nav-icon">📍</span>
+                <span>Location &amp; Timings</span>
+              </Link>
+            </li>
+          </ul>
+
+          {/* Direct Delivery Orders */}
+          <div className="ovl-delivery-links">
+            <p className="ovl-del-title">Order Direct to Your Doorstep:</p>
+            <div className="ovl-del-btns">
+              <a
+                href="https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order"
+                target="_blank"
+                rel="noreferrer"
+                className="ovl-app-btn zomato"
+              >
+                Order on Zomato
+              </a>
+              <a
+                href="https://www.swiggy.com/city/kochi/kailash-parbat-panampilly-nagar-panampilly-nagar-rest1420901?utm_source=GooglePlaceOrder&utm_campaign=GoogleMap&is_retargeting=true&media_source=GooglePlaceOrder"
+                target="_blank"
+                rel="noreferrer"
+                className="ovl-app-btn swiggy"
+              >
+                Order on Swiggy
+              </a>
+            </div>
+          </div>
+
+          {/* Actions: Reservation & Theme */}
+          <div className="ovl-actions">
+            <button
+              onClick={() => {
+                setIsMenuOpen(false);
+                triggerReservation();
+              }}
+              className="ovl-reserve-btn"
+            >
+              📅 Reserve a Table
+            </button>
+            <div className="ovl-theme-wrap">
+              <ThemeToggle />
+            </div>
+          </div>
         </div>
       </div>
 

@@ -364,48 +364,341 @@ a {
   display: none;
 }
 
-/* Mobile Fullscreen Overlay */
+/* ==========================================================
+   MOBILE FULLSCREEN OVERLAY DRAWER WITH AI MENU SHOWCASE
+   ========================================================== */
 .ovl {
   position: fixed;
   inset: 0;
-  background: rgba(22, 19, 17, 0.98);
-  backdrop-filter: blur(12px);
-  z-index: 850;
+  background: rgba(18, 14, 11, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 2000;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
-  padding: 40px 20px;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-8px);
+  overflow: hidden;
 }
 
 .ovl.open {
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
 }
 
-.ovl ul {
-  list-style: none;
-  text-align: center;
-  margin-bottom: 30px;
+.ovl-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid rgba(224, 145, 62, 0.25);
+  background: #15100d;
+  flex-shrink: 0;
 }
 
-.ovl ul li {
-  margin: 14px 0;
+.ovl-brand-bar {
+  display: flex;
+  flex-direction: column;
 }
 
-.ovl ul a {
-  font-family: var(--ff-d);
-  font-size: 26px;
-  color: var(--cream);
-  letter-spacing: 0.05em;
-  transition: color 0.3s;
-}
-
-.ovl ul a:hover {
+.ovl-crest {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   color: var(--orange);
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+
+.ovl-crest-crown {
+  font-size: 12px;
+}
+
+.ovl-crest-yr {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.ovl-brand-title {
+  font-family: var(--ff-d);
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.ovl-brand-sub {
+  font-size: 9.5px;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.ovl-close-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(224, 145, 62, 0.3);
+  color: #ebddc7;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.ovl-close-btn:hover,
+.ovl-close-btn:active {
+  background: var(--orange);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.ovl-scroll-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Featured Menu AI Visual Showcase Card */
+.ovl-menu-ai-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(224, 145, 62, 0.45);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), 0 0 24px rgba(231, 120, 25, 0.18);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: #1e1814;
+}
+
+.ovl-menu-ai-card:active {
+  transform: scale(0.98);
+}
+
+.ovl-menu-ai-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.ovl-menu-ai-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.ovl-menu-ai-card:hover .ovl-menu-ai-img {
+  transform: scale(1.05);
+}
+
+.ovl-menu-ai-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(18, 14, 11, 0.6) 45%,
+    rgba(18, 14, 11, 0.96) 100%
+  );
+  pointer-events: none;
+}
+
+.ovl-menu-ai-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(231, 120, 25, 0.94);
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.ovl-menu-ai-details {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ovl-menu-ai-kicker {
+  font-size: 10px;
+  color: #ded1c1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.ovl-menu-ai-title {
+  font-family: var(--ff-d);
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  margin: 2px 0 6px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.ovl-menu-ai-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #f59e0b;
+  letter-spacing: 0.04em;
+  transition: gap 0.2s ease;
+}
+
+.ovl-menu-ai-card:hover .ovl-menu-ai-cta {
+  color: #fbbf24;
+  gap: 9px;
+}
+
+/* Nav list */
+.ovl-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ovl-nav-list li a,
+.ovl-nav-list li .ovl-menu-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  font-family: var(--ff-b);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #f5ebe1 !important;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.ovl-nav-list li a:hover,
+.ovl-nav-list li a:active,
+.ovl-nav-list li .ovl-menu-link-btn:hover,
+.ovl-nav-list li .ovl-menu-link-btn:active {
+  background: rgba(231, 120, 25, 0.16);
+  border-color: rgba(231, 120, 25, 0.45);
+  color: #ffffff !important;
+  transform: translateX(4px);
+}
+
+.ovl-nav-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* Delivery links */
+.ovl-delivery-links {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(224, 145, 62, 0.22);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.ovl-del-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ded1c1;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ovl-del-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.ovl-app-btn {
+  flex: 1;
+  text-align: center;
+  padding: 11px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff !important;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: block;
+}
+
+.ovl-app-btn:active {
+  transform: scale(0.97);
+}
+
+.ovl-app-btn.zomato {
+  background: #ef4444;
+}
+
+.ovl-app-btn.swiggy {
+  background: #f97316;
+}
+
+/* Actions: Reservation & Theme */
+.ovl-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.ovl-reserve-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #e77819 0%, #cf6610 100%);
+  color: #ffffff;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 4px 14px rgba(231, 120, 25, 0.35);
+  transition: all 0.25s ease;
+}
+
+.ovl-reserve-btn:active {
+  transform: scale(0.98);
+}
+
+.ovl-theme-wrap {
+  flex-shrink: 0;
 }
 
 /* ==========================================================
@@ -1984,62 +2277,7 @@ html.dark .kp-pop-link:hover {
   cursor: pointer;
 }
 
-.ovl-brand-bar {
-  padding: 16px 20px 4px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  margin-bottom: 12px;
-}
 
-.ovl-brand-title {
-  font-family: var(--ff-d);
-  font-size: 26px;
-  font-weight: 700;
-  display: block;
-}
-
-.ovl-brand-sub {
-  font-size: 11px;
-  color: var(--orange);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.ovl-delivery-links {
-  padding: 16px 20px;
-  margin: 16px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.ovl-del-title {
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  opacity: 0.8;
-}
-
-.ovl-del-btns {
-  display: flex;
-  gap: 10px;
-}
-
-.ovl-app-btn {
-  flex: 1;
-  text-align: center;
-  padding: 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #fff;
-}
-
-.ovl-app-btn.zomato {
-  background: #ef4444;
-}
-
-.ovl-app-btn.swiggy {
-  background: #f97316;
-}
 
 /* ==========================================================
    HERO SLIDER
