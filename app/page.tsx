@@ -9,6 +9,7 @@ import SignatureChaats from '@/components/SignatureChaats';
 import MenuSection from '@/components/MenuSection';
 import HospitalitySection from '@/components/HospitalitySection';
 import Testimonials from '@/components/Testimonials';
+import KochiDiningGuide from '@/components/KochiDiningGuide';
 import VisitSection from '@/components/VisitSection';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
@@ -37,6 +38,10 @@ export default function HomePage() {
         <MenuSection onOpenMenu={() => setIsMenuOpen(true)} />
         <HospitalitySection onOpenReservation={() => setIsResOpen(true)} />
         <Testimonials />
+        <KochiDiningGuide
+          onOpenMenu={() => setIsMenuOpen(true)}
+          onOpenReservation={() => setIsResOpen(true)}
+        />
         <VisitSection onOpenReservation={() => setIsResOpen(true)} />
       </main>
       <Footer

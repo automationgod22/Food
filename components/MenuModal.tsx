@@ -38,7 +38,7 @@ const menuData: MenuItem[] = [
     price: '₹449.00',
     desc: 'Butter Milk, Amritsari aloo paratha, chole, dahi & dessert. Complete hearty meal for one.',
     badge: 'Popular',
-    image: '/kp/dishes/paneer_lababdar_curry.jpg',
+    image: '/kp/dishes/chole_bhature.jpg',
   },
   {
     id: 'c2',
@@ -72,7 +72,7 @@ const menuData: MenuItem[] = [
     category: 'combos',
     price: '₹419.00',
     desc: 'Authentic 12-hour slow-cooked black lentils in butter sauce served with 2 rotis/rice, salad & dessert.',
-    image: '/kp/dishes/royal_curries_handi.jpg',
+    image: '/kp/dishes/dal_makhani_handi.jpg',
   },
   {
     id: 'c6',
@@ -102,6 +102,7 @@ const menuData: MenuItem[] = [
     desc: 'Fried puff-pastry balls filled with spiced potato served with chilled spiced mint water & tamarind sauce.',
     badge: '1952 Classic',
     isJain: true,
+    image: '/kp/dishes/pani_puri.jpg',
   },
   {
     id: 'ch2',
@@ -184,6 +185,7 @@ const menuData: MenuItem[] = [
     price: '₹459.00',
     desc: 'Fermented puffed Indian bread served with KP special dark aromatic black chole, pickle & onions.',
     badge: 'Famous Since 1952',
+    image: '/kp/dishes/chole_bhature.jpg',
   },
   {
     id: 'sp2',

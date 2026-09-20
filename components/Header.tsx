@@ -93,7 +93,7 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
         <div className="kp-top-bar-inner">
           {/* Left Segment: Heritage, Address & Operating Hours */}
           <div className="kp-top-left">
-            <span className="kp-top-badge">Estd 1952</span>
+            <span className="kp-top-badge hide-mobile">Estd 1952</span>
 
             <a
               href="https://maps.google.com/?q=Kailash+Parbat+Panampilly+Nagar+Kochi"
@@ -107,7 +107,7 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
               <span className="kp-top-map-tag">Map ↗</span>
             </a>
 
-            <div className="kp-top-time-pill" title="Current Restaurant Hours">
+            <div className="kp-top-time-pill hide-mobile" title="Current Restaurant Hours">
               <span className="kp-live-pulse" aria-hidden="true"></span>
               <span className="kp-top-time-text">Open Daily 11:30 AM – 11:00 PM</span>
             </div>
@@ -135,7 +135,15 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
               <span className="kp-google-count">(373+ Reviews)</span>
             </a>
 
-            <div className="kp-top-order-pills">
+            <a
+              href="tel:04844024444"
+              className="kp-top-call-pill show-mobile-flex"
+              title="Call Kailash Parbat Kochi"
+            >
+              📞 <span>Call</span>
+            </a>
+
+            <div className="kp-top-order-pills hide-mobile">
               <span className="kp-order-label-mini">Quick Order:</span>
               <a
                 href="https://www.zomato.com/kochi/kailash-parbat-panampilly-nagar/order"
@@ -292,23 +300,14 @@ export default function Header({ onOpenMenu, onOpenReservation }: HeaderProps) {
             </li>
           </ul>
 
-          {/* Mobile direct order button */}
+          {/* Mobile direct reservation CTA */}
           <div className="m-cta-group">
-            {onOpenMenu && (
-              <button
-                onClick={onOpenMenu}
-                className="m-menu-quick-btn"
-                aria-label="Open Menu"
-              >
-                Menu
-              </button>
-            )}
             <button
               onClick={triggerReservation}
               className="m-book-btn"
               aria-label="Book Table"
             >
-              Book
+              Book Table
             </button>
           </div>
         </nav>
